@@ -4,6 +4,7 @@ import os
 app = Flask(__name__)
 
 TASKS = []
+
 MEMORY = {
     "system": "Dean'z Elite OS",
     "mode": "foundation",
@@ -24,7 +25,8 @@ AGENT = {
         "expose task structure",
         "expose foundation memory",
         "expose runtime telemetry",
-        "run foundation validation"
+        "run foundation validation",
+        "return foundation orchestration plan"
     ]
 }
 
@@ -120,7 +122,7 @@ def orchestrate():
         "orchestrator": "Foundation Orchestrator",
         "status": "ready",
         "plan": ORCHESTRATION_PLAN,
-        "next_layer": "OpenAI integration"
+        "next_layer": "AWS core implementation"
     }
 
 if __name__ == '__main__':
