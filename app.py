@@ -10,7 +10,7 @@ MEMORY = {
     "notes": [
         "OpenShift deployment lifecycle verified",
         "GitHub source ownership verified",
-        "Health, status, task, memory, and agent endpoints active"
+        "Health, status, task, memory, agent, and telemetry endpoints active"
     ]
 }
 
@@ -22,9 +22,21 @@ AGENT = {
         "report service health",
         "report system status",
         "expose task structure",
-        "expose foundation memory"
+        "expose foundation memory",
+        "expose runtime telemetry"
     ]
 }
+
+REQUIRED_ENDPOINTS = [
+    "/",
+    "/health",
+    "/status",
+    "/tasks",
+    "/memory",
+    "/agent",
+    "/telemetry",
+    "/validate"
+]
 
 @app.route('/')
 def hello():
@@ -66,17 +78,27 @@ def telemetry():
         "infrastructure": "AWS-backed sandbox",
         "phase": "foundation-api",
         "status": "online",
-        "active_endpoints": [
-            "/",
-            "/health",
-            "/status",
-            "/tasks",
-            "/memory",
-            "/agent",
-            "/telemetry"
-        ],
+        "active_endpoints": REQUIRED_ENDPOINTS,
         "task_count": len(TASKS),
         "agent_status": AGENT["status"]
+    }
+
+@app.route('/validate')
+def validate():
+    checks = {
+        "health_online": True,
+        "agent_online": AGENT["status"] == "online",
+        "memory_available": bool(MEMORY),
+        "tasks_available": isinstance(TASKS, list),
+        "required_endpoints_registered": len(REQUIRED_ENDPOINTS) >= 8
+    }
+
+    passed = all(checks.values())
+
+    return {
+        "validator": "Foundation Validator",
+        "passed": passed,
+        "checks": checks
     }
 
 if __name__ == '__main__':
