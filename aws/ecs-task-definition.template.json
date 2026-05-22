@@ -1,0 +1,44 @@
+{
+  "family": "task-planner-foundation",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "cpu": "256",
+  "memory": "512",
+  "executionRoleArn": "arn:aws:iam::<ACCOUNT_ID>:role/task-planner-foundation-execution-role",
+  "taskRoleArn": "arn:aws:iam::<ACCOUNT_ID>:role/task-planner-foundation-task-role",
+  "containerDefinitions": [
+    {
+      "name": "task-planner-foundation",
+      "image": "<IMAGE_URI>",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 8081,
+          "hostPort": 8081,
+          "protocol": "tcp",
+          "name": "http-8081"
+        }
+      ],
+      "environment": [
+        {
+          "name": "FLASK_PORT",
+          "value": "8081"
+        },
+        {
+          "name": "PYTHONUNBUFFERED",
+          "value": "1"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/deanz-elite/task-planner-foundation",
+          "awslogs-region": "<AWS_REGION>",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ]
+}
