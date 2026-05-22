@@ -4,6 +4,15 @@ import os
 app = Flask(__name__)
 
 TASKS = []
+MEMORY = {
+    "system": "Dean'z Elite OS",
+    "mode": "foundation",
+    "notes": [
+        "OpenShift deployment lifecycle verified",
+        "GitHub source ownership verified",
+        "Health, status, and task endpoints active"
+    ]
+}
 
 @app.route('/')
 def hello():
@@ -28,6 +37,10 @@ def tasks():
         "tasks": TASKS,
         "count": len(TASKS)
     }
+
+@app.route('/memory')
+def memory():
+    return MEMORY
 
 if __name__ == '__main__':
     port = os.environ.get('FLASK_PORT') or 8080
