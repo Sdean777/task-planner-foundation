@@ -10,7 +10,7 @@ MEMORY = {
     "notes": [
         "OpenShift deployment lifecycle verified",
         "GitHub source ownership verified",
-        "Health, status, and task endpoints active"
+        "Health, status, task, memory, and agent endpoints active"
     ]
 }
 
@@ -57,6 +57,27 @@ def memory():
 @app.route('/agent')
 def agent():
     return AGENT
+
+@app.route('/telemetry')
+def telemetry():
+    return {
+        "service": "task-planner-foundation",
+        "runtime": "OpenShift",
+        "infrastructure": "AWS-backed sandbox",
+        "phase": "foundation-api",
+        "status": "online",
+        "active_endpoints": [
+            "/",
+            "/health",
+            "/status",
+            "/tasks",
+            "/memory",
+            "/agent",
+            "/telemetry"
+        ],
+        "task_count": len(TASKS),
+        "agent_status": AGENT["status"]
+    }
 
 if __name__ == '__main__':
     port = os.environ.get('FLASK_PORT') or 8080
