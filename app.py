@@ -3,6 +3,8 @@ import os
 
 app = Flask(__name__)
 
+TASKS = []
+
 @app.route('/')
 def hello():
     return "Dean'z Elite OS Foundation Online"
@@ -18,6 +20,13 @@ def status():
         "system": "Dean'z Elite OS Foundation",
         "status": "running",
         "phase": "foundation-api"
+    }
+
+@app.route('/tasks')
+def tasks():
+    return {
+        "tasks": TASKS,
+        "count": len(TASKS)
     }
 
 if __name__ == '__main__':
