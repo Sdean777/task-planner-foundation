@@ -14,6 +14,18 @@ MEMORY = {
     ]
 }
 
+AGENT = {
+    "name": "Foundation Agent",
+    "role": "basic service observer",
+    "status": "online",
+    "capabilities": [
+        "report service health",
+        "report system status",
+        "expose task structure",
+        "expose foundation memory"
+    ]
+}
+
 @app.route('/')
 def hello():
     return "Dean'z Elite OS Foundation Online"
@@ -41,6 +53,10 @@ def tasks():
 @app.route('/memory')
 def memory():
     return MEMORY
+
+@app.route('/agent')
+def agent():
+    return AGENT
 
 if __name__ == '__main__':
     port = os.environ.get('FLASK_PORT') or 8080
