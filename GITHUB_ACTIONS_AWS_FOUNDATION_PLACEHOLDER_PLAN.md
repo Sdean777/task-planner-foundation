@@ -366,10 +366,12 @@ Current completed/active step:
 - CloudWatch service telemetry baseline review (`logs-only baseline confirmed; explicit service telemetry connection still not yet present`)
 - CloudWatch service telemetry baseline proposal (`minimum explicit service-telemetry shape defined over the existing awslogs -> CloudWatch path`)
 - CloudWatch service telemetry controlled patch review (`exact future app.py diff locked to one helper, one import, and one /telemetry emission call`)
+- CloudWatch service telemetry patch (`reviewed app.py diff implemented, immutable sha-a72c3be9ac74a70e841735e1cc6feebf9af08c62 rolled to task-planner-foundation:3, /telemetry response unchanged, and structured service_telemetry_snapshot confirmed in CloudWatch`)
+- CloudWatch service telemetry source publication (`publishes the local telemetry runtime commit, patch doctrine, patch evidence, and updated chain as tracked repository source`)
 
 Still future:
 
-- CloudWatch Service Telemetry Patch v1
+- CloudWatch Service Telemetry Metric Filter Baseline Review v1
 
 This plan now includes bounded first-job image publication and bounded
 second-job rollout paths plus a real ECS service baseline and a completed
@@ -388,5 +390,9 @@ success source-publication checkpoint now closes that local source gap, and the
 CloudWatch service telemetry baseline review now confirms the current
 CloudWatch layer is logs-only, and the baseline proposal now defines the
 minimum explicit service-telemetry shape. The controlled patch review now
-locks the exact future `app.py` diff. The next bounded stage is CloudWatch
-service telemetry patch.
+locks the exact future `app.py` diff. The telemetry patch now completes that
+reviewed `app.py` change, keeps the public contract stable, and proves the
+structured snapshot is present in CloudWatch. The source-publication
+checkpoint now converges the local runtime commit and CloudWatch telemetry
+evidence into tracked repository source. The next bounded stage is CloudWatch
+service telemetry metric-filter baseline review.
