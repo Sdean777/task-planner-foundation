@@ -1,0 +1,50 @@
+{
+  "mission": "Dean'z Elite OS — CloudWatch Service Telemetry Baseline Proposal v1",
+  "status": "completed",
+  "proposalVerdict": "ready_for_controlled_patch_review",
+  "currentBaseline": {
+    "cloudWatchLoggingPresent": true,
+    "structuredServiceTelemetryPresent": false,
+    "existingTelemetryEndpointPresent": true
+  },
+  "futurePatchBoundary": {
+    "targetFiles": [
+      "app.py"
+    ],
+    "workflowChangesRequired": false,
+    "awsMutationRequired": false,
+    "endpointContractChanged": false
+  },
+  "proposedTelemetryChannel": {
+    "path": "stdout -> awslogs -> CloudWatch Logs",
+    "trigger": "/telemetry request",
+    "eventType": "service_telemetry_snapshot"
+  },
+  "proposedFields": [
+    "eventType",
+    "service",
+    "runtime",
+    "infrastructure",
+    "phase",
+    "status",
+    "taskCount",
+    "agentStatus",
+    "activeEndpointCount",
+    "sourceEndpoint"
+  ],
+  "deferredOutOfScope": [
+    "metric filters",
+    "subscription filters",
+    "alarms",
+    "dashboards",
+    "traces",
+    "retention-policy mutation"
+  ],
+  "preservedBoundaries": {
+    "appPyChanged": false,
+    "publicSmokeWorkflowChangedDuringMission": false,
+    "deployWorkflowChangedDuringMission": false,
+    "credentialsAddedToSource": false
+  },
+  "nextMission": "CloudWatch Service Telemetry Controlled Patch Review v1"
+}

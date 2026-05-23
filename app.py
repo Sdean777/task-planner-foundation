@@ -1,4 +1,5 @@
 from flask import Flask
+import json
 import os
 
 app = Flask(__name__)
@@ -74,6 +75,23 @@ def runtime_identity():
         "infrastructure": "Local container-compatible runtime"
     }
 
+
+def emit_service_telemetry_snapshot(payload):
+    event = {
+        "eventType": "service_telemetry_snapshot",
+        "service": payload["service"],
+        "runtime": payload["runtime"],
+        "infrastructure": payload["infrastructure"],
+        "phase": payload["phase"],
+        "status": payload["status"],
+        "taskCount": payload["task_count"],
+        "agentStatus": payload["agent_status"],
+        "activeEndpointCount": len(payload["active_endpoints"]),
+        "sourceEndpoint": "/telemetry"
+    }
+
+    print(json.dumps(event), flush=True)
+
 @app.route('/')
 def hello():
     return "Dean'z Elite OS Foundation Online"
@@ -110,7 +128,7 @@ def agent():
 def telemetry():
     identity = runtime_identity()
 
-    return {
+    telemetry_response = {
         "service": "task-planner-foundation",
         "runtime": identity["runtime"],
         "infrastructure": identity["infrastructure"],
@@ -120,6 +138,10 @@ def telemetry():
         "task_count": len(TASKS),
         "agent_status": AGENT["status"]
     }
+
+    emit_service_telemetry_snapshot(telemetry_response)
+
+    return telemetry_response
 
 @app.route('/validate')
 def validate():

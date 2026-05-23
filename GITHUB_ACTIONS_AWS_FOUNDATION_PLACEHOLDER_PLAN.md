@@ -363,10 +363,13 @@ Current completed/active step:
 - GitHub-hosted public runtime smoke workflow variable baseline (`FOUNDATION_PUBLIC_BASE_URL` created as the explicit non-secret repository variable for the published smoke workflow)
 - third bounded GitHub-hosted public runtime smoke workflow dispatch run (`success` against the published workflow and repository-variable baseline)
 - GitHub-hosted public runtime smoke success source publication (`publishes the blocked retry, variable baseline, successful hosted run, and updated doctrine chain as tracked repository source`)
+- CloudWatch service telemetry baseline review (`logs-only baseline confirmed; explicit service telemetry connection still not yet present`)
+- CloudWatch service telemetry baseline proposal (`minimum explicit service-telemetry shape defined over the existing awslogs -> CloudWatch path`)
+- CloudWatch service telemetry controlled patch review (`exact future app.py diff locked to one helper, one import, and one /telemetry emission call`)
 
 Still future:
 
-- CloudWatch Service Telemetry Baseline Review v1
+- CloudWatch Service Telemetry Patch v1
 
 This plan now includes bounded first-job image publication and bounded
 second-job rollout paths plus a real ECS service baseline and a completed
@@ -382,4 +385,8 @@ baseline are now recorded. The second bounded hosted-dispatch retry is also
 recorded as blocked at missing repository-variable input, and the third
 bounded hosted-dispatch run is now recorded as successful. The hosted-smoke
 success source-publication checkpoint now closes that local source gap, and the
-next bounded stage is CloudWatch service telemetry baseline review.
+CloudWatch service telemetry baseline review now confirms the current
+CloudWatch layer is logs-only, and the baseline proposal now defines the
+minimum explicit service-telemetry shape. The controlled patch review now
+locks the exact future `app.py` diff. The next bounded stage is CloudWatch
+service telemetry patch.

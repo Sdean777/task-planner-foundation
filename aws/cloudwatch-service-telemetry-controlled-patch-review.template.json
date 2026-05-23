@@ -1,0 +1,50 @@
+{
+  "mission": "Dean'z Elite OS — CloudWatch Service Telemetry Controlled Patch Review v1",
+  "status": "completed",
+  "reviewVerdict": "ready_for_patch",
+  "targetFile": "app.py",
+  "allowedFutureDiff": {
+    "addImports": [
+      "json"
+    ],
+    "addHelpers": [
+      "emit_service_telemetry_snapshot"
+    ],
+    "modifyRoutes": [
+      "/telemetry"
+    ],
+    "workflowChangesRequired": false,
+    "awsMutationRequired": false
+  },
+  "blockedFutureDiff": [
+    "endpoint path changes",
+    "telemetry response contract changes",
+    "telemetry emission from other endpoints",
+    "CloudWatch API calls",
+    "alarms",
+    "filters",
+    "subscriptions",
+    "dashboards",
+    "traces",
+    "workflow changes"
+  ],
+  "eventShape": [
+    "eventType",
+    "service",
+    "runtime",
+    "infrastructure",
+    "phase",
+    "status",
+    "taskCount",
+    "agentStatus",
+    "activeEndpointCount",
+    "sourceEndpoint"
+  ],
+  "preservedBoundaries": {
+    "appPyChanged": false,
+    "publicSmokeWorkflowChangedDuringMission": false,
+    "deployWorkflowChangedDuringMission": false,
+    "credentialsAddedToSource": false
+  },
+  "nextMission": "CloudWatch Service Telemetry Patch v1"
+}
