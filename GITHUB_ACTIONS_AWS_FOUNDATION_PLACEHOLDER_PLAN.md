@@ -459,10 +459,13 @@ Current completed/active step:
 - CloudWatch service telemetry alarm human receiver confirmation state post-source proposal (`defines the minimum future decision boundary after publication, requires explicit confirmed subscription state before any later wiring, and keeps SNS mutation, receiver widening, and alarm wiring out of scope`)
 - CloudWatch service telemetry alarm human receiver confirmation state post-source controlled review (`defines one exact future decision boundary after publication, confirms that confirmation is still external and patch-blocked, and hands off to publication instead of a fake alarm-wiring patch`)
 - CloudWatch service telemetry alarm human receiver confirmation state post-source source publication (`publishes the post-source review, proposal, and controlled-review checkpoint as tracked repository source while the receiver still remains pending confirmation and the alarm still remains unwired`)
+- CloudWatch service telemetry alarm human receiver confirmation state post-source state review (`re-checks the live receiver after the post-source checkpoint is on main, confirms whether publication was followed by confirmation, and keeps alarm wiring blocked while the receiver still remains pending`)
+- CloudWatch service telemetry alarm human receiver confirmation state post-source state proposal (`defines the minimum hold-shape decision after the published post-source checkpoint is re-checked, keeps the pending-confirmation and actions-disabled posture explicit, and blocks alarm wiring, receiver swaps, or new SNS mutation`)
+- CloudWatch service telemetry alarm human receiver confirmation state post-source state source publication (`publishes the post-source state review and post-source state proposal checkpoint as tracked repository source while the receiver still remains pending confirmation and the alarm still remains unwired`)
 
 Still future:
 
-- CloudWatch Service Telemetry Alarm Human Receiver Confirmation State Post-Source State Review v1
+- CloudWatch Service Telemetry Alarm Human Receiver Confirmation State Post-Source State Post-Source Review v1
 
 This plan now includes bounded first-job image publication and bounded
 second-job rollout paths plus a real ECS service baseline and a completed
