@@ -53,6 +53,27 @@ ORCHESTRATION_PLAN = [
     "Return ordered execution state"
 ]
 
+
+def runtime_identity():
+    aws_execution_env = os.environ.get('AWS_EXECUTION_ENV', '')
+
+    if aws_execution_env.startswith('AWS_ECS'):
+        return {
+            "runtime": "AWS ECS Fargate",
+            "infrastructure": "AWS ALB + ECS Fargate"
+        }
+
+    if os.environ.get('KUBERNETES_SERVICE_HOST'):
+        return {
+            "runtime": "Kubernetes/OpenShift-compatible container",
+            "infrastructure": "Kubernetes/OpenShift-compatible container platform"
+        }
+
+    return {
+        "runtime": "Local Flask development server",
+        "infrastructure": "Local container-compatible runtime"
+    }
+
 @app.route('/')
 def hello():
     return "Dean'z Elite OS Foundation Online"
@@ -87,10 +108,12 @@ def agent():
 
 @app.route('/telemetry')
 def telemetry():
+    identity = runtime_identity()
+
     return {
         "service": "task-planner-foundation",
-        "runtime": "OpenShift",
-        "infrastructure": "AWS-backed sandbox",
+        "runtime": identity["runtime"],
+        "infrastructure": identity["infrastructure"],
         "phase": "foundation-api",
         "status": "online",
         "active_endpoints": REQUIRED_ENDPOINTS,
