@@ -378,10 +378,13 @@ Current completed/active step:
 - CloudWatch service telemetry alarm controlled patch review (`exact one-alarm CloudWatch mutation locked to the foundation metric, actions-disabled posture, and sparse-signal safety boundary`)
 - CloudWatch service telemetry alarm patch (`one reviewed alarm created on the foundation metric, actions remain disabled, and the initial state is bounded to INSUFFICIENT_DATA rather than paging posture`)
 - CloudWatch service telemetry alarm source publication (`publishes the local alarm review, proposal, controlled review, patch doctrine, patch evidence, and updated chain as tracked repository source`)
+- CloudWatch service telemetry alarm state review (`published alarm settled to OK, actions remain disabled, metric binding remains correct, and next work is proposal-only`)
+- CloudWatch service telemetry alarm state proposal (`current alarm shape should be held as-is, sparse-signal posture remains explicit, and the next bounded step is source publication rather than another live alarm mutation`)
+- CloudWatch service telemetry alarm state source publication (`publishes the local alarm-state review, hold-shape proposal, and updated chain as tracked repository source`)
 
 Still future:
 
-- CloudWatch Service Telemetry Alarm State Review v1
+- CloudWatch Service Telemetry Alarm Wiring Review v1
 
 This plan now includes bounded first-job image publication and bounded
 second-job rollout paths plus a real ECS service baseline and a completed
@@ -421,10 +424,11 @@ alarm shape as foundation-scoped, actions-disabled, and missing-data aware,
 while keeping the next bounded stage at controlled patch review rather than
 live mutation. The controlled patch review now locks the exact one-alarm
 CloudWatch mutation boundary and keeps the next bounded stage at a single
-foundation-scoped alarm patch rather than a wider observability rollout. The
-alarm patch now creates that one reviewed alarm, keeps actions disabled, and
-accepts the initial `INSUFFICIENT_DATA` state as the correct sparse-signal
-posture immediately after creation. The source-publication checkpoint now
-converges the local alarm doctrine and patch evidence into tracked repository
-source. The next bounded stage is alarm-state review, not a larger alarm or
-paging rollout.
+alarm patch. The alarm-state review now confirms that the published alarm
+settled into `OK` while keeping actions disabled and the correct metric
+binding. The alarm-state proposal now defines the minimum next-shape decision
+as a hold-shape publication checkpoint rather than another live alarm mutation.
+The alarm-state source-publication checkpoint now converges the local
+alarm-state review and proposal into tracked repository source. The next
+bounded stage is now alarm wiring review, not another silent threshold or
+action mutation.
