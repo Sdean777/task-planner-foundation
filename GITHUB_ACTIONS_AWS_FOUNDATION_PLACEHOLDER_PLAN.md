@@ -381,10 +381,18 @@ Current completed/active step:
 - CloudWatch service telemetry alarm state review (`published alarm settled to OK, actions remain disabled, metric binding remains correct, and next work is proposal-only`)
 - CloudWatch service telemetry alarm state proposal (`current alarm shape should be held as-is, sparse-signal posture remains explicit, and the next bounded step is source publication rather than another live alarm mutation`)
 - CloudWatch service telemetry alarm state source publication (`publishes the local alarm-state review, hold-shape proposal, and updated chain as tracked repository source`)
+- CloudWatch service telemetry alarm wiring review (`no action-wiring path is justified yet because actions remain disabled, arrays remain empty, and the signal is still sparse`)
+- CloudWatch service telemetry alarm wiring proposal (`defines one future human-notification-only candidate class, keeps OK and insufficient-data actions out of scope, and keeps the current alarm actions-disabled`)
+- CloudWatch service telemetry alarm wiring controlled review (`makes the candidate future mutation explicit, blocks live patching because no approved target doctrine exists yet, and sends the chain to target baseline review`)
+- CloudWatch service telemetry alarm human notification target baseline review (`confirms there is no repo-level target doctrine and no SNS topic baseline in us-east-1, so the next stage must remain proposal-only`)
+- CloudWatch service telemetry alarm human notification target proposal (`defines one future foundation-scoped SNS topic shape, keeps subscribers and live target creation out of scope, and moves the next stage to controlled review`)
+- CloudWatch service telemetry alarm human notification target controlled review (`locks the exact one-topic SNS mutation boundary and moves the next stage to the first bounded target patch`)
+- CloudWatch service telemetry alarm human notification target patch (`creates the reviewed SNS topic, proves it exists unsubscribed, and preserves the alarm's actions-disabled posture`)
+- CloudWatch service telemetry alarm human notification target source publication (`publishes the local wiring doctrine, target doctrine, target patch evidence, and updated chain as tracked repository source`)
 
 Still future:
 
-- CloudWatch Service Telemetry Alarm Wiring Review v1
+- CloudWatch Service Telemetry Alarm Wiring Post-Target Review v1
 
 This plan now includes bounded first-job image publication and bounded
 second-job rollout paths plus a real ECS service baseline and a completed
@@ -431,4 +439,30 @@ as a hold-shape publication checkpoint rather than another live alarm mutation.
 The alarm-state source-publication checkpoint now converges the local
 alarm-state review and proposal into tracked repository source. The next
 bounded stage is now alarm wiring review, not another silent threshold or
-action mutation.
+action mutation. The alarm wiring review now confirms that no action-wiring
+path is justified yet because the published alarm is still actions-disabled,
+all action arrays remain empty, and the signal remains sparse. The next
+bounded stage is now alarm wiring proposal, not live wiring. The alarm wiring
+proposal now defines one future human-notification-only candidate class,
+keeps OK and insufficient-data actions out of scope, and moves the next
+bounded stage to controlled review rather than live mutation. The alarm wiring
+controlled review now makes the candidate mutation explicit, confirms the repo
+still lacks an approved human-notification target doctrine, and moves the next
+bounded stage to target baseline review rather than live alarm-action patching.
+The human-notification target baseline review now confirms that no target
+doctrine exists in source and no SNS topic baseline exists in `us-east-1`, so
+the next bounded stage must remain proposal-only rather than live target
+creation or alarm-action wiring. The human-notification target proposal now
+defines one future foundation-scoped SNS topic shape, keeps subscribers and
+live target creation out of scope, and moves the next bounded stage to
+controlled review rather than patching. The human-notification target
+controlled review now locks the exact one-topic SNS mutation boundary, keeps
+subscribers and alarm wiring out of scope, and moves the next bounded stage to
+the first target patch. The human-notification target patch now creates the
+reviewed SNS topic, proves it exists unsubscribed, preserves the alarm's
+actions-disabled posture, and moves the next bounded stage to source
+publication rather than alarm wiring. The human-notification target source
+publication checkpoint now converges the local wiring doctrine, target
+doctrine, and target patch evidence into tracked repository source, so the
+next bounded stage can re-review alarm wiring with a published target now
+present.
