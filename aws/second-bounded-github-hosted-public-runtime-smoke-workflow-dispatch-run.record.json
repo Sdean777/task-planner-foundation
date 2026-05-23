@@ -1,0 +1,37 @@
+{
+  "mission": "Dean'z Elite OS — Second Bounded GitHub-Hosted Public Runtime Smoke Workflow Dispatch Run v1",
+  "status": "blocked",
+  "blockedReason": "missing repository variable FOUNDATION_PUBLIC_BASE_URL",
+  "preflight": {
+    "gitState": {
+      "branch": "main",
+      "headCommit": "ad3685e8008413267f85adea904038377bdc8bf0",
+      "originMainMatchesHead": true
+    },
+    "githubState": {
+      "ghAuthValid": true,
+      "workflowVisibleRemotely": true,
+      "workflowName": "Public Runtime Smoke",
+      "repositoryVariableFoundationPublicBaseUrlPresent": false
+    },
+    "repositoryBackedHostedDispatchTruthSatisfied": false
+  },
+  "mutations": {
+    "hostedDispatchAttempted": false,
+    "repositoryVariableMutatedDuringMission": false,
+    "workflowFilesChangedDuringMission": false,
+    "awsMutatedDuringMission": false
+  },
+  "preservedBoundaries": {
+    "appPyChanged": false,
+    "publicSmokeWorkflowChangedDuringMission": false,
+    "deployWorkflowChangedDuringMission": false,
+    "credentialsAddedToSource": false
+  },
+  "notes": [
+    "GitHub auth is valid and the workflow is visible remotely.",
+    "The hosted run is correctly blocked because the workflow's required non-secret repository variable FOUNDATION_PUBLIC_BASE_URL does not exist.",
+    "The correct next step is to establish the repository-variable baseline, not to dispatch a guaranteed startup failure."
+  ],
+  "nextMission": "GitHub-Hosted Public Runtime Smoke Workflow Variable Baseline v1"
+}

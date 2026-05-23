@@ -1,0 +1,39 @@
+{
+  "mission": "Dean'z Elite OS — GitHub-Hosted Public Runtime Smoke Workflow Variable Baseline v1",
+  "status": "completed",
+  "repoState": {
+    "branch": "main",
+    "headCommit": "ad3685e8008413267f85adea904038377bdc8bf0",
+    "originMainMatchesHead": true
+  },
+  "preflight": {
+    "blockedRunSource": "DEANZ_ELITE_OS_SECOND_BOUNDED_GITHUB_HOSTED_PUBLIC_RUNTIME_SMOKE_WORKFLOW_DISPATCH_RUN_V1.md",
+    "workflowPublishedInRepositorySource": true,
+    "repositoryVariablePreviouslyPresent": false,
+    "stableBaseUrlSource": "DEANZ_ELITE_OS_PUBLIC_ROUTING_BASELINE_STANDUP_V1.md"
+  },
+  "variableBaseline": {
+    "name": "FOUNDATION_PUBLIC_BASE_URL",
+    "scope": "repository variable",
+    "value": "http://deanzelite-alb-2130825976.us-east-1.elb.amazonaws.com:8081",
+    "nonSecretBoundary": true,
+    "verifiedAfterSet": true
+  },
+  "mutations": {
+    "repositoryVariableMutatedDuringMission": true,
+    "workflowFilesChangedDuringMission": false,
+    "awsMutatedDuringMission": false
+  },
+  "preservedBoundaries": {
+    "appPyChanged": false,
+    "publicSmokeWorkflowChangedDuringMission": false,
+    "deployWorkflowChangedDuringMission": false,
+    "credentialsAddedToSource": false
+  },
+  "notes": [
+    "The stable public base URL already existed from the routing baseline; this mission only established the matching repository-variable boundary.",
+    "The variable value is intentionally non-secret and mirrors the current ALB-backed public runtime base URL.",
+    "The correct next step is a third bounded hosted-dispatch run, not another configuration placeholder."
+  ],
+  "nextMission": "Third Bounded GitHub-Hosted Public Runtime Smoke Workflow Dispatch Run v1"
+}

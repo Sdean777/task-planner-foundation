@@ -359,10 +359,14 @@ Current completed/active step:
 - GitHub-hosted public runtime smoke workflow dispatch controlled run review (`ready_for_first_bounded_run` without workflow mutation or hosted execution)
 - first bounded GitHub-hosted public runtime smoke workflow dispatch run (`blocked` because the smoke workflow chain is still local untracked source state, not tracked repository source`)
 - GitHub-hosted public runtime smoke workflow source publication (`publishes the bounded smoke workflow chain into tracked and pushed repository source`)
+- second bounded GitHub-hosted public runtime smoke workflow dispatch run (`blocked` because FOUNDATION_PUBLIC_BASE_URL is missing in GitHub repository variables`)
+- GitHub-hosted public runtime smoke workflow variable baseline (`FOUNDATION_PUBLIC_BASE_URL` created as the explicit non-secret repository variable for the published smoke workflow)
+- third bounded GitHub-hosted public runtime smoke workflow dispatch run (`success` against the published workflow and repository-variable baseline)
+- GitHub-hosted public runtime smoke success source publication (`publishes the blocked retry, variable baseline, successful hosted run, and updated doctrine chain as tracked repository source`)
 
 Still future:
 
-- Second Bounded GitHub-Hosted Public Runtime Smoke Workflow Dispatch Run v1
+- CloudWatch Service Telemetry Baseline Review v1
 
 This plan now includes bounded first-job image publication and bounded
 second-job rollout paths plus a real ECS service baseline and a completed
@@ -372,7 +376,10 @@ verification run. Telemetry runtime identity alignment and repeatable
 post-deploy smoke proof are now complete, the smoke-automation review
 boundary, proposal shape, controlled patch boundary, first read-only smoke
 workflow patch, first bounded automation run, hosted-dispatch review,
-hosted-dispatch proposal, hosted-dispatch controlled run review, and the first
-bounded hosted-dispatch run are now recorded, source publication is the active
-checkpoint mission, and the next bounded stage after publication is the second
-bounded GitHub-hosted public runtime smoke workflow dispatch run.
+hosted-dispatch proposal, hosted-dispatch controlled run review, the first
+bounded hosted-dispatch run, source publication, and repository-variable
+baseline are now recorded. The second bounded hosted-dispatch retry is also
+recorded as blocked at missing repository-variable input, and the third
+bounded hosted-dispatch run is now recorded as successful. The hosted-smoke
+success source-publication checkpoint now closes that local source gap, and the
+next bounded stage is CloudWatch service telemetry baseline review.
