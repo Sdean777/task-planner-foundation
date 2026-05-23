@@ -1,0 +1,45 @@
+{
+  "candidateJob": "push-image-placeholder",
+  "authActionInvocationReviewVersion": "v1",
+  "allowedFutureInvocationPlacement": [
+    "single job-local auth action step inside push-image-placeholder",
+    "after a future reviewed job-local permissions block",
+    "before any future ECR login or image-push step"
+  ],
+  "allowedFutureInvocationShape": [
+    "aws-actions/configure-aws-credentials@v4",
+    "role-to-assume",
+    "aws-region",
+    "role-session-name"
+  ],
+  "requiredUpstreamEvidence": [
+    "app.py unchanged",
+    "push-image-placeholder still disabled",
+    "permission-placeholder patch intact",
+    "OIDC auth-placeholder patch intact",
+    "OIDC trust posture still valid",
+    "workflow-level permissions still contents: read",
+    "later jobs unchanged and disabled",
+    "clean secrets posture"
+  ],
+  "mustRemainAbsent": [
+    "live auth action invocation",
+    "aws-access-key-id",
+    "aws-secret-access-key",
+    "ECR login commands",
+    "image-push commands",
+    "workflow-level permission changes",
+    "changes to ecs-rollout-placeholder",
+    "changes to public-verification-placeholder"
+  ],
+  "reviewOutcomes": [
+    "auth_action_invocation_blocked",
+    "auth_action_invocation_review_required",
+    "auth_action_invocation_ready_for_placeholder_patch"
+  ],
+  "notes": [
+    "Planning artifact only.",
+    "Not a workflow patch or auth token.",
+    "Does not authorize live action invocation."
+  ]
+}

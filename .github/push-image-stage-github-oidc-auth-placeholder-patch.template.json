@@ -1,0 +1,42 @@
+{
+  "patchedJob": "push-image-placeholder",
+  "patchVersion": "v1",
+  "preservedLines": [
+    "push-image-placeholder",
+    "if: ${{ false }}",
+    "needs: activation-gate-summary",
+    "workflow-level permissions: contents: read",
+    "workflow_dispatch-only trigger"
+  ],
+  "addedPlaceholderMessages": [
+    "Future job-local permissions boundary: contents: read + id-token: write only.",
+    "Future auth placement: inside push-image-placeholder before any ECR login or push.",
+    "Future trust references: Sdean777/task-planner-foundation, refs/heads/main, production, sts.amazonaws.com.",
+    "Future auth inputs: explicit AWS region and deterministic role session name only.",
+    "No static credentials, live auth action, ECR login, or image push is allowed in this mission."
+  ],
+  "unchangedJobs": [
+    "activation-gate-summary",
+    "ecs-rollout-placeholder",
+    "public-verification-placeholder"
+  ],
+  "stillForbiddenActions": [
+    "Enable push-image-placeholder",
+    "Change workflow-level permissions",
+    "Add aws-actions/configure-aws-credentials",
+    "Add aws-access-key-id",
+    "Add aws-secret-access-key",
+    "Add ECR login",
+    "Add docker push"
+  ],
+  "outcome": [
+    "auth_placeholder_patch_applied",
+    "auth_placeholder_patch_still_disabled",
+    "auth_placeholder_patch_still_non_deploying"
+  ],
+  "notes": [
+    "Planning artifact only.",
+    "Records the first reviewed auth-placeholder hunk patch.",
+    "Does not authorize live AWS authentication."
+  ]
+}

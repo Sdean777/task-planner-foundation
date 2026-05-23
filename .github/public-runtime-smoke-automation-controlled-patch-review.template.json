@@ -1,0 +1,45 @@
+{
+  "reviewedSurface": "public-runtime-smoke-automation-future-workflow",
+  "reviewVersion": "v1",
+  "reviewedPatchTarget": {
+    "newWorkflowPath": ".github/workflows/public-runtime-smoke.yml",
+    "deploymentWorkflowMustRemainUntouched": true,
+    "appCodeMustRemainUntouched": true
+  },
+  "allowedPatchShape": {
+    "workflowDispatchOnly": true,
+    "workflowLevelPermissions": {
+      "contents": "read"
+    },
+    "singleJobOnly": "public-runtime-smoke",
+    "runtimeInputSource": "vars.FOUNDATION_PUBLIC_BASE_URL",
+    "derivedVariable": "PUBLIC_BASE_URL",
+    "roundCount": 3,
+    "roundSpacingSeconds": 5,
+    "summaryOnlyOutcome": true
+  },
+  "allowedCommands": [
+    "curl",
+    "jq",
+    "sleep"
+  ],
+  "stillForbiddenActions": [
+    "Create the workflow file in this mission",
+    "Modify deploy-foundation-skeleton.yml",
+    "Add schedule or workflow_run triggers",
+    "Add AWS auth or mutation commands",
+    "Hardcode the live public base URL",
+    "Auto-roll back on smoke failure",
+    "Bundle smoke automation with rollout or image push logic"
+  ],
+  "reviewOutcomes": [
+    "smoke_automation_controlled_patch_blocked",
+    "smoke_automation_controlled_patch_review_required",
+    "smoke_automation_controlled_patch_ready_for_patch"
+  ],
+  "notes": [
+    "Planning artifact only.",
+    "Does not create the workflow file.",
+    "Not a workflow control plane and not a patch token."
+  ]
+}

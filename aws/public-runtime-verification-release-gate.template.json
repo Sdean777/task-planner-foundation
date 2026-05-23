@@ -1,0 +1,74 @@
+{
+  "serviceName": "task-planner-foundation",
+  "gateVersion": "v1",
+  "verificationOrder": [
+    "ecs-service-stability",
+    "target-group-health",
+    "cloudwatch-log-visibility",
+    "public-runtime-endpoint-verification",
+    "release-decision"
+  ],
+  "blockingChecks": [
+    {
+      "name": "ecs-service-stability",
+      "type": "infrastructure",
+      "required": true
+    },
+    {
+      "name": "target-group-health",
+      "type": "infrastructure",
+      "required": true
+    },
+    {
+      "name": "cloudwatch-log-visibility",
+      "type": "infrastructure",
+      "required": true
+    },
+    {
+      "name": "health-endpoint",
+      "path": "/health",
+      "expectedStatus": 200,
+      "required": true
+    },
+    {
+      "name": "status-endpoint",
+      "path": "/status",
+      "expectedStatus": 200,
+      "required": true
+    },
+    {
+      "name": "validate-endpoint",
+      "path": "/validate",
+      "expectedStatus": 200,
+      "required": true
+    },
+    {
+      "name": "orchestrate-endpoint",
+      "path": "/orchestrate",
+      "expectedStatus": 200,
+      "required": true
+    }
+  ],
+  "warningChecks": [
+    {
+      "name": "telemetry-endpoint",
+      "path": "/telemetry",
+      "expectedStatus": 200,
+      "required": false
+    }
+  ],
+  "gateOutcomes": [
+    "keep_active",
+    "manual_review_required",
+    "rollback_required"
+  ],
+  "rollbackReference": {
+    "requiresPreviousKnownGoodRevision": true,
+    "requiresPreviousImmutableImageReference": true
+  },
+  "notes": [
+    "Planning artifact only.",
+    "Not a live deployment gate.",
+    "Do not store production URLs or credentials here."
+  ]
+}

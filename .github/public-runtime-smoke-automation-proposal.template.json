@@ -1,0 +1,52 @@
+{
+  "proposedSurface": "post-deploy-public-runtime-smoke-automation",
+  "proposalVersion": "v1",
+  "minimalDiffShape": {
+    "newWorkflowFileOnly": true,
+    "proposedWorkflowPath": ".github/workflows/public-runtime-smoke.yml",
+    "deploymentWorkflowMustRemainUnchanged": true,
+    "workflowDispatchOnly": true,
+    "workflowLevelPermissions": {
+      "contents": "read"
+    },
+    "serviceScope": "task-planner-foundation"
+  },
+  "proposedFutureJob": {
+    "jobName": "public-runtime-smoke",
+    "runtimeInputSource": "vars.FOUNDATION_PUBLIC_BASE_URL",
+    "derivedVariable": "PUBLIC_BASE_URL",
+    "roundCount": 3,
+    "roundSpacingSeconds": 5,
+    "signalSet": [
+      "/",
+      "/health",
+      "/status",
+      "/tasks",
+      "/memory",
+      "/agent",
+      "/telemetry",
+      "/validate",
+      "/orchestrate"
+    ],
+    "summaryOnlyOutcome": true
+  },
+  "proposalOutcomes": [
+    "smoke_automation_proposal_blocked",
+    "smoke_automation_proposal_review_required",
+    "smoke_automation_proposal_ready_for_controlled_patch_review"
+  ],
+  "stillForbiddenActions": [
+    "Create the workflow in this mission",
+    "Modify deploy-foundation-skeleton.yml",
+    "Add schedule or workflow_run triggers",
+    "Hardcode the live public base URL",
+    "Introduce AWS auth or mutation commands",
+    "Auto-roll back on smoke failure",
+    "Combine smoke automation with rollout or image push logic"
+  ],
+  "notes": [
+    "Planning artifact only.",
+    "Defines a later read-only workflow shape without creating it.",
+    "Not a workflow and not an approval token."
+  ]
+}

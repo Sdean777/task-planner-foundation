@@ -1,0 +1,42 @@
+{
+  "mission": "Dean'z Elite OS — First Bounded GitHub-Hosted Public Runtime Smoke Workflow Dispatch Run v1",
+  "status": "blocked",
+  "blockedReason": "reviewed smoke workflow chain exists only in local untracked source state",
+  "preflight": {
+    "gitState": {
+      "branch": "main",
+      "headCommit": "6e926501b3ebee8e73e83fc8e445537d3a7a4494",
+      "workingTreeClean": false
+    },
+    "workflowSource": {
+      "workflowPath": ".github/workflows/public-runtime-smoke.yml",
+      "workflowTrackedInHead": false,
+      "workflowTrackedInIndex": false,
+      "workflowPresentOnlyAsLocalWorktreeState": true
+    },
+    "doctrineChain": {
+      "hostedDispatchReviewTrackedInHead": false,
+      "hostedDispatchProposalTrackedInHead": false,
+      "hostedDispatchControlledRunReviewTrackedInHead": false
+    },
+    "repositoryBackedHostedDispatchTruthSatisfied": false
+  },
+  "mutations": {
+    "hostedDispatchAttempted": false,
+    "repositoryPushedDuringMission": false,
+    "workflowFilesChangedDuringMission": false,
+    "awsMutatedDuringMission": false
+  },
+  "preservedBoundaries": {
+    "appPyChanged": false,
+    "publicSmokeWorkflowChangedDuringMission": false,
+    "deployWorkflowChangedDuringMission": false,
+    "credentialsAddedToSource": false
+  },
+  "notes": [
+    "GitHub-hosted execution can only run tracked repository source, not local untracked workflow files.",
+    "The current smoke workflow and hosted-dispatch doctrine chain are not tracked in HEAD or staged in the index.",
+    "The correct next step is a clean source publication checkpoint, not a guessed hosted dispatch."
+  ],
+  "nextMission": "GitHub-Hosted Public Runtime Smoke Workflow Source Publication v1"
+}

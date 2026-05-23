@@ -1,0 +1,48 @@
+{
+  "mission": "Dean'z Elite OS — ECS Service Baseline Standup v1",
+  "status": "completed",
+  "cluster": {
+    "clusterArn": "arn:aws:ecs:us-east-1:329601960228:cluster/task-planner-foundation",
+    "clusterName": "task-planner-foundation"
+  },
+  "logGroup": {
+    "name": "/deanz-elite/task-planner-foundation",
+    "created": true
+  },
+  "taskDefinition": {
+    "taskDefinitionArn": "arn:aws:ecs:us-east-1:329601960228:task-definition/task-planner-foundation:1",
+    "family": "task-planner-foundation",
+    "revision": 1,
+    "imageTag": "sha-dfc958a333b792f82c3feaaa4f543d323450938f",
+    "imageDigest": "sha256:2455af6b5b4a787cd8671c1f2c4410ffc76eef4b52f09fb37f1572565207d4ad",
+    "executionRoleArn": "arn:aws:iam::329601960228:role/ecsTaskExecutionRole-deanzelite",
+    "taskRoleArn": "arn:aws:iam::329601960228:role/ecsTaskExecutionRole-deanzelite"
+  },
+  "service": {
+    "serviceArn": "arn:aws:ecs:us-east-1:329601960228:service/task-planner-foundation/task-planner-foundation",
+    "serviceName": "task-planner-foundation",
+    "desiredCount": 1,
+    "runningCount": 1,
+    "pendingCount": 0,
+    "launchType": "FARGATE",
+    "rolloutState": "COMPLETED",
+    "subnets": [
+      "subnet-04bc9dcc0fef57a46",
+      "subnet-0651dde07d6ec76d3"
+    ],
+    "securityGroups": [
+      "sg-0538f40fa41c92d64"
+    ],
+    "assignPublicIp": "ENABLED"
+  },
+  "runtime": {
+    "taskArn": "arn:aws:ecs:us-east-1:329601960228:task/task-planner-foundation/e0a3f7ccebd14d68954086ee2f4acefe",
+    "publicVerificationAttached": false
+  },
+  "notes": [
+    "The baseline reuses ecsTaskExecutionRole-deanzelite as a bounded bootstrap compromise because dedicated service-scoped roles do not exist yet.",
+    "The service is steady but not yet exposed through a public verification path.",
+    "The next bounded mission should review the public-verification stage, not widen rollout again."
+  ],
+  "nextMission": "Public Verification Stage Candidate Review v1"
+}

@@ -1,0 +1,50 @@
+{
+  "serviceName": "task-planner-foundation",
+  "imageRepository": "task-planner-foundation",
+  "immutableDeploymentTagShape": "sha-<git-sha>",
+  "convenienceTags": [
+    "main"
+  ],
+  "disallowedRolloutTags": [
+    "latest",
+    "<AD_HOC_MANUAL_TAG>"
+  ],
+  "promotionStages": [
+    {
+      "stage": "local-verification-artifact",
+      "source": "container-build-verify.yml",
+      "deployable": false
+    },
+    {
+      "stage": "candidate-image",
+      "tagShape": "sha-<git-sha>",
+      "deployable": true
+    },
+    {
+      "stage": "convenience-mirror",
+      "tagShape": "main",
+      "deployable": false
+    },
+    {
+      "stage": "ecs-rollout-target",
+      "sourceOfTruth": "task-definition-revision-referencing-immutable-image",
+      "deployable": true
+    }
+  ],
+  "revisionHandoff": {
+    "taskDefinitionFamily": "task-planner-foundation",
+    "containerName": "task-planner-foundation",
+    "imageUriPlaceholder": "<AWS_ACCOUNT_ID>.dkr.ecr.<AWS_REGION>.amazonaws.com/task-planner-foundation:sha-<git-sha>",
+    "requiresExplicitRevision": true
+  },
+  "rollbackRules": {
+    "requiresPreviousRevisionReference": true,
+    "requiresPreviousImmutableImageReference": true,
+    "rollbackTarget": "previous-known-good-task-definition-revision"
+  },
+  "notes": [
+    "Planning artifact only.",
+    "Not a deploy manifest or workflow.",
+    "Do not store live image digests or credentials here."
+  ]
+}

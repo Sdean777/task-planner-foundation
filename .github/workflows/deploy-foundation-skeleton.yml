@@ -1,0 +1,319 @@
+name: Foundation Deployment Skeleton
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_environment:
+        description: Future deployment environment placeholder
+        required: false
+        default: production
+      image_tag:
+        description: Future immutable image tag placeholder
+        required: false
+        default: sha-<git-sha>
+
+permissions:
+  contents: read
+
+jobs:
+  activation-gate-summary:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Show activation-gate posture
+        run: |
+          echo "Deployment workflow skeleton only."
+          echo "Push and deploy stages are intentionally disabled."
+          echo "Target environment placeholder: ${{ inputs.target_environment }}"
+          echo "Image tag placeholder: ${{ inputs.image_tag }}"
+          echo "See DEANZ_ELITE_OS_DEPLOYMENT_WORKFLOW_ACTIVATION_GATE_V1.md"
+
+  # Disabled by design.
+  # This job now carries the first bounded live push-image path.
+  # It remains manual-only, first-job-only, and subordinate to immutable sha tag truth.
+  push-image-placeholder:
+    if: ${{ github.ref == 'refs/heads/main' && inputs.target_environment == 'production' && startsWith(inputs.image_tag, 'sha-') && inputs.image_tag != 'sha-<git-sha>' && vars.AWS_ACCOUNT_ID != '' && vars.AWS_REGION != '' }}
+    runs-on: ubuntu-latest
+    needs: activation-gate-summary
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout source for bounded push-image stage
+        uses: actions/checkout@v4
+
+      - name: Show bounded push-image activation posture
+        run: |
+          echo "Push-image stage live-enable patch v1."
+          echo "Immutable rollout truth: sha-<git-sha> only."
+          echo "Protected target posture: production on refs/heads/main."
+          echo "AWS trust boundary: GitHub OIDC only; no long-lived keys."
+          echo "Later jobs remain disabled: ecs-rollout-placeholder, public-verification-placeholder."
+          echo "Job-local permissions stay bounded to contents: read plus id-token: write."
+
+      - name: Derive bounded ECR image coordinates
+        run: |
+          ECR_REGISTRY="${{ vars.AWS_ACCOUNT_ID }}.dkr.ecr.${{ vars.AWS_REGION }}.amazonaws.com"
+          ECR_REPOSITORY="task-planner-foundation"
+          SHA_IMAGE_URI="$ECR_REGISTRY/$ECR_REPOSITORY:${{ inputs.image_tag }}"
+          MAIN_IMAGE_URI="$ECR_REGISTRY/$ECR_REPOSITORY:main"
+          echo "ECR_REGISTRY=$ECR_REGISTRY" >> "$GITHUB_ENV"
+          echo "ECR_REPOSITORY=$ECR_REPOSITORY" >> "$GITHUB_ENV"
+          echo "SHA_IMAGE_URI=$SHA_IMAGE_URI" >> "$GITHUB_ENV"
+          echo "MAIN_IMAGE_URI=$MAIN_IMAGE_URI" >> "$GITHUB_ENV"
+
+      - name: Configure AWS credentials for bounded push-image stage
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::${{ vars.AWS_ACCOUNT_ID }}:role/task-planner-foundation-github-oidc-deploy-role
+          aws-region: ${{ vars.AWS_REGION }}
+          role-session-name: foundation-push-image-${{ github.run_id }}
+
+      - name: Log in to ECR for bounded push-image stage
+        run: |
+          aws ecr get-login-password --region "${{ vars.AWS_REGION }}" | docker login --username AWS --password-stdin "$ECR_REGISTRY"
+
+      - name: Build bounded foundation image
+        run: |
+          docker build -f docker/Dockerfile -t "$SHA_IMAGE_URI" .
+          docker tag "$SHA_IMAGE_URI" "$MAIN_IMAGE_URI"
+
+      - name: Push immutable image tag
+        run: |
+          docker push "$SHA_IMAGE_URI"
+
+      - name: Push convenience main tag
+        run: |
+          docker push "$MAIN_IMAGE_URI"
+
+  # Disabled by design.
+  # This job now carries the first bounded live ECS rollout path.
+  # It remains manual-only, second-job-only, and subordinate to immutable sha image truth.
+  ecs-rollout-placeholder:
+    if: ${{ github.ref == 'refs/heads/main' && inputs.target_environment == 'production' && startsWith(inputs.image_tag, 'sha-') && inputs.image_tag != 'sha-<git-sha>' && vars.AWS_ACCOUNT_ID != '' && vars.AWS_REGION != '' && vars.ECS_CLUSTER_NAME != '' && vars.ECS_SERVICE_NAME != '' }}
+    runs-on: ubuntu-latest
+    needs: push-image-placeholder
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout source for bounded ECS rollout stage
+        uses: actions/checkout@v4
+
+      - name: Show bounded ECS rollout activation posture
+        run: |
+          echo "ECS rollout stage patch v1."
+          echo "Immutable rollout truth: sha-<git-sha> image only."
+          echo "Protected target posture: production on refs/heads/main."
+          echo "AWS trust boundary: GitHub OIDC only; no long-lived keys."
+          echo "Push-image stage remains upstream; public-verification stage remains disabled."
+          echo "Job-local permissions stay bounded to contents: read plus id-token: write."
+
+      - name: Derive bounded ECS rollout coordinates
+        run: |
+          ECR_REGISTRY="${{ vars.AWS_ACCOUNT_ID }}.dkr.ecr.${{ vars.AWS_REGION }}.amazonaws.com"
+          ECR_REPOSITORY="task-planner-foundation"
+          SHA_IMAGE_URI="$ECR_REGISTRY/$ECR_REPOSITORY:${{ inputs.image_tag }}"
+          echo "ECR_REGISTRY=$ECR_REGISTRY" >> "$GITHUB_ENV"
+          echo "ECR_REPOSITORY=$ECR_REPOSITORY" >> "$GITHUB_ENV"
+          echo "SHA_IMAGE_URI=$SHA_IMAGE_URI" >> "$GITHUB_ENV"
+
+      - name: Configure AWS credentials for bounded ECS rollout stage
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::${{ vars.AWS_ACCOUNT_ID }}:role/task-planner-foundation-github-oidc-deploy-role
+          aws-region: ${{ vars.AWS_REGION }}
+          role-session-name: foundation-ecs-rollout-${{ github.run_id }}
+
+      - name: Confirm immutable image input exists in ECR
+        run: |
+          aws ecr describe-images \
+            --repository-name "$ECR_REPOSITORY" \
+            --region "${{ vars.AWS_REGION }}" \
+            --image-ids "imageTag=${{ inputs.image_tag }}"
+
+      - name: Render bounded task-definition candidate
+        env:
+          AWS_ACCOUNT_ID: ${{ vars.AWS_ACCOUNT_ID }}
+          AWS_REGION: ${{ vars.AWS_REGION }}
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          template_path = Path("aws/ecs-task-definition.template.json")
+          rendered_path = Path(os.environ["RUNNER_TEMP"]) / "task-definition.rendered.json"
+          data = json.loads(template_path.read_text())
+
+          def replace(node):
+              if isinstance(node, dict):
+                  return {key: replace(value) for key, value in node.items()}
+              if isinstance(node, list):
+                  return [replace(value) for value in node]
+              if isinstance(node, str):
+                  return (
+                      node.replace("<ACCOUNT_ID>", os.environ["AWS_ACCOUNT_ID"])
+                      .replace("<AWS_REGION>", os.environ["AWS_REGION"])
+                      .replace("<IMAGE_URI>", os.environ["SHA_IMAGE_URI"])
+                  )
+              return node
+
+          rendered = replace(data)
+          rendered_path.write_text(json.dumps(rendered, indent=2) + "\n")
+
+          with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as handle:
+              handle.write(f"RENDERED_TASK_DEFINITION={rendered_path}\n")
+          PY
+
+      - name: Capture previous ECS service revision
+        run: |
+          PREVIOUS_TASK_DEFINITION_ARN="$(aws ecs describe-services \
+            --cluster "${{ vars.ECS_CLUSTER_NAME }}" \
+            --services "${{ vars.ECS_SERVICE_NAME }}" \
+            --region "${{ vars.AWS_REGION }}" \
+            --query 'services[0].taskDefinition' \
+            --output text)"
+          test -n "$PREVIOUS_TASK_DEFINITION_ARN"
+          test "$PREVIOUS_TASK_DEFINITION_ARN" != "None"
+          echo "PREVIOUS_TASK_DEFINITION_ARN=$PREVIOUS_TASK_DEFINITION_ARN" >> "$GITHUB_ENV"
+          echo "Previous rollout revision: $PREVIOUS_TASK_DEFINITION_ARN"
+
+      - name: Register bounded ECS task-definition revision
+        run: |
+          NEW_TASK_DEFINITION_ARN="$(aws ecs register-task-definition \
+            --region "${{ vars.AWS_REGION }}" \
+            --cli-input-json "file://$RENDERED_TASK_DEFINITION" \
+            --query 'taskDefinition.taskDefinitionArn' \
+            --output text)"
+          echo "NEW_TASK_DEFINITION_ARN=$NEW_TASK_DEFINITION_ARN" >> "$GITHUB_ENV"
+          echo "New rollout revision: $NEW_TASK_DEFINITION_ARN"
+
+      - name: Update ECS service to bounded task-definition revision
+        run: |
+          aws ecs update-service \
+            --cluster "${{ vars.ECS_CLUSTER_NAME }}" \
+            --service "${{ vars.ECS_SERVICE_NAME }}" \
+            --task-definition "$NEW_TASK_DEFINITION_ARN" \
+            --region "${{ vars.AWS_REGION }}"
+
+  # Disabled by design.
+  # This job now carries the first bounded live public verification path.
+  # It remains manual-only, third-job-only, and subordinate to release-gate order.
+  public-verification-placeholder:
+    if: ${{ github.ref == 'refs/heads/main' && inputs.target_environment == 'production' && startsWith(inputs.image_tag, 'sha-') && inputs.image_tag != 'sha-<git-sha>' && vars.FOUNDATION_PUBLIC_BASE_URL != '' && (startsWith(vars.FOUNDATION_PUBLIC_BASE_URL, 'https://') || startsWith(vars.FOUNDATION_PUBLIC_BASE_URL, 'http://')) }}
+    runs-on: ubuntu-latest
+    needs: ecs-rollout-placeholder
+
+    steps:
+      - name: Show bounded public verification activation posture
+        run: |
+          echo "Public verification stage patch v1."
+          echo "Protected target posture: production on refs/heads/main."
+          echo "Non-secret runtime input: FOUNDATION_PUBLIC_BASE_URL only."
+          echo "Push-image and ECS rollout stages remain upstream and unchanged."
+          echo "Bounded outcomes: keep_active, manual_review_required, or rollback_required."
+
+      - name: Derive bounded public verification coordinates
+        run: |
+          RAW_PUBLIC_BASE_URL="${{ vars.FOUNDATION_PUBLIC_BASE_URL }}"
+          PUBLIC_BASE_URL="${RAW_PUBLIC_BASE_URL%/}"
+          echo "PUBLIC_BASE_URL=$PUBLIC_BASE_URL" >> "$GITHUB_ENV"
+          echo "Bounded public verification base URL: $PUBLIC_BASE_URL"
+
+      - name: Run bounded public verification checks
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          verify_json_endpoint() {
+            local path="$1"
+            local kind="$2"
+            local attempts=6
+            local sleep_seconds=10
+            local url="${PUBLIC_BASE_URL}${path}"
+
+            for attempt in $(seq 1 "$attempts"); do
+              echo "Verifying ${kind} at ${url} (attempt ${attempt}/${attempts})"
+
+              if response="$(curl --silent --show-error --fail --max-time 15 "$url")"; then
+                if RESPONSE="$response" EXPECT_KIND="$kind" python3 - <<'PY'
+          import json
+          import os
+          import sys
+
+          payload = json.loads(os.environ["RESPONSE"])
+          kind = os.environ["EXPECT_KIND"]
+          checks = {
+              "health": payload.get("status") == "online",
+              "status": payload.get("app") == "task-planner-foundation" and payload.get("status") == "running",
+              "validate": payload.get("passed") is True and payload.get("validator") == "Foundation Validator",
+              "orchestrate": payload.get("status") == "ready" and payload.get("orchestrator") == "Foundation Orchestrator",
+              "telemetry": payload.get("service") == "task-planner-foundation" and payload.get("status") == "online",
+          }
+          sys.exit(0 if checks.get(kind, False) else 1)
+          PY
+                then
+                  echo "Verified ${kind}"
+                  return 0
+                fi
+              fi
+
+              if [[ "$attempt" -lt "$attempts" ]]; then
+                sleep "$sleep_seconds"
+              fi
+            done
+
+            echo "Verification failed for ${kind} at ${url}"
+            return 1
+          }
+
+          verify_json_endpoint "/health" "health"
+          verify_json_endpoint "/status" "status"
+          verify_json_endpoint "/validate" "validate"
+          verify_json_endpoint "/orchestrate" "orchestrate"
+
+          telemetry_warning=false
+          if verify_json_endpoint "/telemetry" "telemetry"; then
+            echo "Telemetry verification passed."
+          else
+            telemetry_warning=true
+            echo "::warning::Telemetry verification degraded while release-blocking checks passed."
+          fi
+
+          echo "TELEMETRY_WARNING=$telemetry_warning" >> "$GITHUB_ENV"
+
+      - name: Record bounded public verification outcome
+        if: ${{ success() }}
+        shell: bash
+        run: |
+          if [[ "${TELEMETRY_WARNING:-false}" == "true" ]]; then
+            outcome="manual_review_required"
+          else
+            outcome="keep_active"
+          fi
+
+          echo "PUBLIC_VERIFICATION_OUTCOME=$outcome" >> "$GITHUB_ENV"
+
+          {
+            echo "### Public Verification Outcome"
+            echo "- Outcome: ${outcome}"
+            echo "- Base URL: ${PUBLIC_BASE_URL}"
+            echo "- Image tag: ${{ inputs.image_tag }}"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Record rollback-required outcome
+        if: ${{ failure() }}
+        run: |
+          {
+            echo "### Public Verification Outcome"
+            echo "- Outcome: rollback_required"
+            echo "- Release-blocking verification failed."
+            echo "- Base URL: ${{ vars.FOUNDATION_PUBLIC_BASE_URL }}"
+            echo "- Image tag: ${{ inputs.image_tag }}"
+          } >> "$GITHUB_STEP_SUMMARY"

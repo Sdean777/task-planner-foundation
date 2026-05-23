@@ -1,0 +1,40 @@
+{
+  "candidateJob": "public-verification-placeholder",
+  "reviewVersion": "v1",
+  "requiredEvidence": {
+    "foundationPreserved": true,
+    "containerBuildVerificationWorkflowPresent": true,
+    "firstBoundedEcrPublicationCompleted": true,
+    "ecsRolloutPatchPresent": true,
+    "firstBoundedEcsRolloutRunRecorded": true,
+    "ecsServiceBaselineStandupCompleted": true,
+    "ecsServiceBaselineSteady": true,
+    "pushImagePathRemainsBoundedLive": true,
+    "ecsRolloutPathRemainsBoundedLive": true,
+    "publicVerificationPlaceholderStillDisabled": true,
+    "workflowLevelPermissionsStillContentsRead": true,
+    "publicRuntimeReleaseGateContractPresent": true,
+    "noLivePublicVerificationCommandsInWorkflow": true,
+    "noCommittedProductionEndpointUrls": true,
+    "cleanSecretsPosture": true
+  },
+  "reviewOutcomes": [
+    "public_verification_stage_blocked",
+    "public_verification_stage_review_required",
+    "public_verification_stage_candidate_ready"
+  ],
+  "stillForbiddenActions": [
+    "Enable public-verification-placeholder",
+    "Commit live curl or wget smoke-test commands",
+    "Commit production endpoint URLs",
+    "Mutate ALB, target group, DNS, or API Gateway state",
+    "Mutate push-image-placeholder",
+    "Mutate ecs-rollout-placeholder",
+    "Bundle app changes with public verification review"
+  ],
+  "notes": [
+    "Planning artifact only.",
+    "Not an approval token or workflow control plane.",
+    "Does not enable any workflow job."
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "candidateJob": "push-image-placeholder",
+  "loginCommandInvocationReviewVersion": "v1",
+  "allowedFutureInvocationPlacement": [
+    "single job-local registry-login command step inside push-image-placeholder",
+    "after a future auth-action step",
+    "before any future image-push step"
+  ],
+  "allowedFutureInvocationShape": [
+    "aws ecr get-login-password",
+    "docker login --username AWS --password-stdin",
+    "aws-region",
+    "explicit ECR registry URI"
+  ],
+  "requiredUpstreamEvidence": [
+    "app.py unchanged",
+    "push-image-placeholder still disabled",
+    "OIDC auth-action placeholder patch intact",
+    "push-job permission placeholder patch intact",
+    "OIDC trust posture still valid",
+    "workflow-level permissions still contents: read",
+    "later jobs unchanged and disabled",
+    "clean secrets posture"
+  ],
+  "mustRemainAbsent": [
+    "live auth action invocation",
+    "live login command invocation",
+    "inline passwords",
+    "image-push commands",
+    "workflow-level permission changes",
+    "changes to ecs-rollout-placeholder",
+    "changes to public-verification-placeholder",
+    "static AWS credentials"
+  ],
+  "reviewOutcomes": [
+    "login_command_invocation_blocked",
+    "login_command_invocation_review_required",
+    "login_command_invocation_ready_for_placeholder_patch"
+  ],
+  "notes": [
+    "Planning artifact only.",
+    "Not a workflow patch or registry token.",
+    "Does not authorize live login-command invocation."
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "candidateJob": "push-image-placeholder",
+  "proposalVersion": "v1",
+  "allowedDiffScope": [
+    "push-image-placeholder job only",
+    "comments describing still-disabled later jobs",
+    "placeholder-bound intent lines",
+    "narrow permissions review for the first job"
+  ],
+  "mustRemainUnchanged": [
+    "ecs-rollout-placeholder",
+    "public-verification-placeholder",
+    "workflow_dispatch-only trigger",
+    "task-planner-foundation service scope",
+    "app.py"
+  ],
+  "recheckEvidence": [
+    "push-image candidate review still satisfied",
+    "protected environment posture still valid",
+    "GitHub OIDC trust posture still valid",
+    "immutable sha tag rule still valid",
+    "clean secrets posture",
+    "later jobs still disabled"
+  ],
+  "proposalOutcomes": [
+    "proposal_blocked",
+    "proposal_review_required",
+    "proposal_ready_for_patch_mission"
+  ],
+  "stillForbiddenActions": [
+    "Modify ecs-rollout-placeholder",
+    "Modify public-verification-placeholder",
+    "Enable any job",
+    "Add AWS authentication",
+    "Add docker push",
+    "Add any real AWS mutating command"
+  ],
+  "notes": [
+    "Planning artifact only.",
+    "Not a patch or workflow control plane.",
+    "Does not authorize workflow mutation."
+  ]
+}

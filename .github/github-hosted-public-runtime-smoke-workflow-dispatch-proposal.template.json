@@ -1,0 +1,61 @@
+{
+  "proposedSurface": "github-hosted-public-runtime-smoke-workflow-dispatch",
+  "proposalVersion": "v1",
+  "minimalFutureExecutionShape": {
+    "existingWorkflowPath": ".github/workflows/public-runtime-smoke.yml",
+    "workflowSourceMustRemainUnchanged": true,
+    "deploymentWorkflowMustRemainUnchanged": true,
+    "repositoryBackedManualDispatchOnly": true,
+    "targetBranch": "main",
+    "workflowDispatchOnly": true,
+    "workflowLevelPermissions": {
+      "contents": "read"
+    },
+    "runtimeInputSource": "vars.FOUNDATION_PUBLIC_BASE_URL",
+    "serviceScope": "task-planner-foundation"
+  },
+  "proposedHostedRun": {
+    "workflowName": "Public Runtime Smoke",
+    "runner": "ubuntu-latest",
+    "jobName": "public-runtime-smoke",
+    "derivedVariable": "PUBLIC_BASE_URL",
+    "roundCount": 3,
+    "roundSpacingSeconds": 5,
+    "signalSet": [
+      "/",
+      "/health",
+      "/status",
+      "/tasks",
+      "/memory",
+      "/agent",
+      "/telemetry",
+      "/validate",
+      "/orchestrate"
+    ],
+    "summaryOnlyOutcome": true,
+    "hostedEvidenceSurface": [
+      "GitHub Actions run logs",
+      "GitHub Actions step summary"
+    ]
+  },
+  "proposalOutcomes": [
+    "hosted_dispatch_proposal_blocked",
+    "hosted_dispatch_proposal_review_required",
+    "hosted_dispatch_proposal_ready_for_controlled_run_review"
+  ],
+  "stillForbiddenActions": [
+    "Run the GitHub-hosted workflow dispatch in this mission",
+    "Modify public-runtime-smoke.yml in this mission",
+    "Modify deploy-foundation-skeleton.yml in this mission",
+    "Add schedule, workflow_run, push, or pull_request triggers",
+    "Widen workflow permissions",
+    "Add AWS auth or mutation commands",
+    "Hardcode the live public base URL",
+    "Introduce rollback or remediation authority"
+  ],
+  "notes": [
+    "Planning artifact only.",
+    "Defines a later repository-backed hosted execution boundary without running it.",
+    "Not a workflow run and not an approval token."
+  ]
+}

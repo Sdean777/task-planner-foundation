@@ -1,0 +1,41 @@
+{
+  "repositoryOwner": "Sdean777",
+  "repositoryName": "task-planner-foundation",
+  "audience": "sts.amazonaws.com",
+  "allowedRefs": [
+    "refs/heads/main"
+  ],
+  "allowedEnvironments": [
+    "<OPTIONAL_PROTECTED_ENVIRONMENT>"
+  ],
+  "futureDeploymentWorkflow": {
+    "status": "deferred",
+    "workflowPath": "<FUTURE_DEPLOY_WORKFLOW_PATH>",
+    "notes": [
+      "Trust remains deferred until a dedicated deployment workflow exists.",
+      "Do not allow every workflow in the repo to assume the deployment role."
+    ]
+  },
+  "futureRoleNames": {
+    "deploymentRoleName": "task-planner-foundation-github-oidc-deploy-role",
+    "oidcProviderArn": "arn:aws:iam::<AWS_ACCOUNT_ID>:oidc-provider/token.actions.githubusercontent.com"
+  },
+  "claimExpectations": {
+    "repository": "Sdean777/task-planner-foundation",
+    "audience": "sts.amazonaws.com",
+    "ref": "refs/heads/main",
+    "environment": "<OPTIONAL_PROTECTED_ENVIRONMENT>",
+    "workflowIdentity": "<FUTURE_WORKFLOW_IDENTITY_CONSTRAINT>"
+  },
+  "forbiddenTrustPatterns": [
+    "Wildcard repository trust",
+    "Wildcard branch trust",
+    "Fork-based deployment trust",
+    "Long-lived AWS keys in GitHub secrets"
+  ],
+  "notes": [
+    "Planning artifact only.",
+    "Not a live IAM trust policy.",
+    "Do not store credentials or production trust JSON here."
+  ]
+}

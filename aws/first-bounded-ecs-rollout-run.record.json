@@ -1,0 +1,41 @@
+{
+  "mission": "Dean'z Elite OS — First Bounded ECS Rollout Run v1",
+  "status": "blocked",
+  "blockedReason": "missing ECS task-definition family and service baseline",
+  "sourceImage": {
+    "repositoryUri": "329601960228.dkr.ecr.us-east-1.amazonaws.com/task-planner-foundation",
+    "imageTag": "sha-dfc958a333b792f82c3feaaa4f543d323450938f",
+    "imageDigest": "sha256:2455af6b5b4a787cd8671c1f2c4410ffc76eef4b52f09fb37f1572565207d4ad",
+    "mainTagPresent": true
+  },
+  "preflight": {
+    "taskDefinitionFamily": "task-planner-foundation",
+    "taskDefinitionPresent": false,
+    "guessedDedicatedCluster": {
+      "name": "task-planner-foundation",
+      "status": "missing"
+    },
+    "existingClusterProbe": {
+      "name": "deanzelite-cluster",
+      "serviceName": "task-planner-foundation",
+      "serviceStatus": "missing"
+    }
+  },
+  "mutations": {
+    "taskDefinitionRegistered": false,
+    "ecsServiceUpdated": false,
+    "publicVerificationAttempted": false
+  },
+  "preservedBoundaries": {
+    "appPyChanged": false,
+    "pushImageBehaviorChangedDuringRun": false,
+    "publicVerificationStillDisabled": true,
+    "credentialsAddedToSource": false
+  },
+  "notes": [
+    "Immutable image truth was present in ECR.",
+    "The rollout stopped before mutation because there was no authoritative baseline service to advance.",
+    "The correct next step is service-baseline standup, not blind rollout retry."
+  ],
+  "nextMission": "ECS Service Baseline Standup v1"
+}

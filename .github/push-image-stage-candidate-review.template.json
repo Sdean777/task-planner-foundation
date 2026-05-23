@@ -1,0 +1,34 @@
+{
+  "candidateJob": "push-image-placeholder",
+  "reviewVersion": "v1",
+  "requiredEvidence": {
+    "foundationPreserved": true,
+    "containerBuildVerificationWorkflowPresent": true,
+    "deploymentWorkflowActivationGatePresent": true,
+    "deploymentWorkflowSkeletonPresent": true,
+    "protectedDeploymentEnvironmentContractPresent": true,
+    "deploymentWorkflowEnablementReviewContractPresent": true,
+    "githubOidcDeploymentTrustContractPresent": true,
+    "ecrImagePromotionRolloutContractPresent": true,
+    "immutableTagRulePresent": true,
+    "cleanSecretsPosture": true
+  },
+  "reviewOutcomes": [
+    "push_image_candidate_blocked",
+    "push_image_candidate_review_required",
+    "push_image_candidate_allowed_for_enablement_proposal"
+  ],
+  "stillForbiddenActions": [
+    "Enable push-image-placeholder",
+    "Add AWS authentication",
+    "Login to ECR",
+    "Push any image",
+    "Advance ecs-rollout-placeholder",
+    "Advance public-verification-placeholder"
+  ],
+  "notes": [
+    "Planning artifact only.",
+    "Not an approval token or workflow control plane.",
+    "Does not enable any workflow job."
+  ]
+}

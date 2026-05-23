@@ -1,0 +1,40 @@
+{
+  "serviceName": "task-planner-foundation",
+  "gateVersion": "v1",
+  "preconditions": {
+    "foundationServiceContractPreserved": true,
+    "containerBuildVerificationWorkflowPresent": true,
+    "ecsRuntimeContractPresent": true,
+    "ecsServiceRunbookPresent": true,
+    "ecsParameterEnvironmentContractPresent": true,
+    "ecsIdentityAccessBoundaryPresent": true,
+    "githubOidcTrustContractPresent": true,
+    "ecrRolloutContractPresent": true,
+    "publicRuntimeReleaseGateContractPresent": true,
+    "secretsPostureClean": true,
+    "rollbackPostureDefined": true
+  },
+  "manualApprovalsRequired": [
+    "owner-operator-approval",
+    "oidc-trust-boundary-approval",
+    "release-gate-and-rollback-approval",
+    "single-service-scope-approval"
+  ],
+  "gateOutcomes": [
+    "workflow_still_blocked",
+    "workflow_review_required",
+    "workflow_activation_allowed"
+  ],
+  "stillForbiddenActions": [
+    "Commit AWS credentials",
+    "Create live OIDC trust",
+    "Push images to ECR",
+    "Update ECS services",
+    "Bypass release-gate verification"
+  ],
+  "notes": [
+    "Planning artifact only.",
+    "Not a workflow or approval system.",
+    "Does not authorize live deployment."
+  ]
+}

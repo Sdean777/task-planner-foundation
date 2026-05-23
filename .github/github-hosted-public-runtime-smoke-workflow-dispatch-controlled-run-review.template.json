@@ -1,0 +1,46 @@
+{
+  "reviewedSurface": "github-hosted-public-runtime-smoke-workflow-dispatch-controlled-run",
+  "reviewVersion": "v1",
+  "reviewedRunTarget": {
+    "workflowPath": ".github/workflows/public-runtime-smoke.yml",
+    "targetBranch": "main",
+    "deploymentWorkflowMustRemainUntouched": true,
+    "appCodeMustRemainUntouched": true
+  },
+  "allowedRunShape": {
+    "workflowDispatchOnly": true,
+    "workflowLevelPermissions": {
+      "contents": "read"
+    },
+    "singleJobOnly": "public-runtime-smoke",
+    "runtimeInputSource": "vars.FOUNDATION_PUBLIC_BASE_URL",
+    "derivedVariable": "PUBLIC_BASE_URL",
+    "roundCount": 3,
+    "roundSpacingSeconds": 5,
+    "summaryOnlyOutcome": true,
+    "hostedEvidenceSurface": [
+      "GitHub Actions run logs",
+      "GitHub Actions step summary"
+    ]
+  },
+  "stillForbiddenActions": [
+    "Run the GitHub-hosted workflow dispatch in this mission",
+    "Modify public-runtime-smoke.yml",
+    "Modify deploy-foundation-skeleton.yml",
+    "Add schedule or workflow_run triggers",
+    "Widen workflow permissions",
+    "Add AWS auth or mutation commands",
+    "Hardcode the live public base URL",
+    "Auto-roll back on smoke failure"
+  ],
+  "reviewOutcomes": [
+    "hosted_dispatch_controlled_run_blocked",
+    "hosted_dispatch_controlled_run_review_required",
+    "hosted_dispatch_ready_for_first_bounded_run"
+  ],
+  "notes": [
+    "Planning artifact only.",
+    "Does not execute a hosted workflow dispatch.",
+    "Not a hosted workflow control plane and not a run token."
+  ]
+}

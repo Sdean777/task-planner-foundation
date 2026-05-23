@@ -1,0 +1,48 @@
+{
+  "reviewedSurface": "post-deploy-public-runtime-smoke-automation",
+  "reviewVersion": "v1",
+  "requiredEvidence": {
+    "stableAlbBaseUrlExists": true,
+    "ecsServiceRevision2Steady": true,
+    "telemetryRuntimeIdentityAligned": true,
+    "secondBoundedPublicVerificationCompleted": true,
+    "postDeploySmokeTestsCompleted": true,
+    "postDeploySmokeRoundsPassed": true,
+    "deploymentWorkflowUnchangedInThisReview": true,
+    "readOnlyScopePreserved": true,
+    "cleanSecretsPosture": true
+  },
+  "allowedFutureSignalClasses": [
+    "Public root response",
+    "GET /health",
+    "GET /status",
+    "GET /tasks",
+    "GET /memory",
+    "GET /agent",
+    "GET /telemetry",
+    "GET /validate",
+    "GET /orchestrate",
+    "Read-only ECS service state inspection",
+    "Read-only target-health inspection",
+    "Read-only CloudWatch log visibility"
+  ],
+  "stillForbiddenActions": [
+    "Create a new smoke workflow in this mission",
+    "Modify deploy-foundation-skeleton.yml in this mission",
+    "Add schedule or workflow_run triggers",
+    "Hardcode the live public base URL in workflow source",
+    "Add mutation-bearing AWS commands",
+    "Auto-roll back on smoke failure",
+    "Bundle smoke automation with image publication or ECS rollout"
+  ],
+  "reviewOutcomes": [
+    "smoke_automation_blocked",
+    "smoke_automation_review_required",
+    "smoke_automation_candidate_ready"
+  ],
+  "notes": [
+    "Planning artifact only.",
+    "Read-only smoke automation remains subordinate to the existing release-gate chain.",
+    "Not a workflow and not an approval token."
+  ]
+}

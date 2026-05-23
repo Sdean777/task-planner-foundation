@@ -1,0 +1,47 @@
+{
+  "candidateJob": "public-verification-placeholder",
+  "proposalVersion": "v1",
+  "proposedDiffScope": {
+    "onlyJob": "public-verification-placeholder",
+    "preservePushImageBehavior": true,
+    "preserveEcsRolloutBehavior": true,
+    "preserveWorkflowDispatchOnly": true,
+    "preserveWorkflowLevelPermissionsContentsRead": true,
+    "preserveServiceScope": "task-planner-foundation"
+  },
+  "proposalOnlyCommands": [
+    "curl",
+    "wget",
+    "Equivalent public runtime probe commands"
+  ],
+  "recheckEvidence": {
+    "publicVerificationCandidateReviewStillSatisfied": true,
+    "firstBoundedEcrPublicationStillVerified": true,
+    "ecsServiceBaselineStillSteady": true,
+    "publicVerificationPlaceholderStillDisabled": true,
+    "pushImagePathStillUnchanged": true,
+    "ecsRolloutPathStillUnchanged": true,
+    "appPyUnchanged": true,
+    "releaseGateAndRollbackPosturePresent": true,
+    "cleanSecretsPosture": true
+  },
+  "proposalOutcomes": [
+    "public_verification_stage_proposal_blocked",
+    "public_verification_stage_proposal_review_required",
+    "public_verification_stage_proposal_ready_for_controlled_patch_review"
+  ],
+  "stillForbiddenActions": [
+    "Enable public-verification-placeholder",
+    "Modify push-image-placeholder",
+    "Modify ecs-rollout-placeholder",
+    "Widen workflow-level permissions",
+    "Commit live public runtime checks",
+    "Commit production endpoint URLs",
+    "Bundle app changes with public verification proposal"
+  ],
+  "notes": [
+    "Planning artifact only.",
+    "Not a patch or workflow control plane.",
+    "Does not enable any workflow job."
+  ]
+}

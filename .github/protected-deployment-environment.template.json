@@ -1,0 +1,34 @@
+{
+  "environmentName": "production",
+  "allowedRefs": [
+    "refs/heads/main"
+  ],
+  "approvalCategories": [
+    "owner-operator-approval",
+    "deployment-boundary-approval",
+    "rollback-and-release-gate-approval",
+    "service-scope-approval"
+  ],
+  "reviewerPosture": {
+    "minimumHumanReviewers": 1,
+    "selfApprovalAllowed": false,
+    "notes": [
+      "Planning artifact only.",
+      "Do not store real reviewer identities here unless explicitly approved."
+    ]
+  },
+  "stillDisabledActions": [
+    "ECR push job execution",
+    "ECS rollout job execution",
+    "Public runtime verification execution",
+    "Live AWS authentication"
+  ],
+  "preconditions": {
+    "deploymentWorkflowActivationGatePresent": true,
+    "deploymentWorkflowSkeletonPresent": true,
+    "githubOidcTrustBoundaryPresent": true,
+    "rolloutContractPresent": true,
+    "releaseGateContractPresent": true,
+    "secretsPostureClean": true
+  }
+}

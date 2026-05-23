@@ -1,0 +1,42 @@
+{
+  "candidateJob": "push-image-placeholder",
+  "loginShapeReviewVersion": "v1",
+  "allowedFutureLoginPlacement": [
+    "single job-local registry-login step inside push-image-placeholder",
+    "after a future OIDC auth step",
+    "before any future image-push step"
+  ],
+  "allowedFutureLoginInputs": [
+    "explicit AWS region from non-secret parameter source",
+    "explicit ECR registry URI from approved parameter boundary",
+    "aws ecr get-login-password piped to docker login --password-stdin"
+  ],
+  "requiredUpstreamEvidence": [
+    "app.py unchanged",
+    "push-image-placeholder still disabled",
+    "OIDC auth-placeholder patch intact",
+    "OIDC trust posture still valid",
+    "immutable sha tag rule still valid",
+    "ECR rollout contract still valid",
+    "later jobs unchanged and disabled",
+    "clean secrets posture"
+  ],
+  "mustRemainAbsent": [
+    "live OIDC auth action",
+    "image push commands",
+    "ECS rollout commands",
+    "static AWS credentials",
+    "changes to ecs-rollout-placeholder",
+    "changes to public-verification-placeholder"
+  ],
+  "reviewOutcomes": [
+    "ecr_login_shape_blocked",
+    "ecr_login_shape_review_required",
+    "ecr_login_shape_ready_for_placeholder_login_patch"
+  ],
+  "notes": [
+    "Planning artifact only.",
+    "Not a workflow patch or registry token.",
+    "Does not authorize live ECR login."
+  ]
+}

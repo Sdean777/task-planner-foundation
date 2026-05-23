@@ -1,0 +1,45 @@
+{
+  "candidateJob": "push-image-placeholder",
+  "permissionReviewVersion": "v1",
+  "allowedFuturePermissionPlacement": [
+    "single job-local permissions block on push-image-placeholder",
+    "no workflow-level permission change",
+    "no permission changes on later-stage jobs"
+  ],
+  "allowedFuturePermissionShape": [
+    "contents: read",
+    "id-token: write"
+  ],
+  "requiredUpstreamEvidence": [
+    "app.py unchanged",
+    "push-image-placeholder still disabled",
+    "OIDC auth-placeholder patch intact",
+    "ECR-login placeholder patch intact",
+    "image-push placeholder patch intact",
+    "OIDC trust posture still valid",
+    "later jobs unchanged and disabled",
+    "clean secrets posture"
+  ],
+  "mustRemainAbsent": [
+    "workflow-level permission widening",
+    "contents: write",
+    "packages: write",
+    "deployments: write",
+    "auth commands",
+    "login commands",
+    "push commands",
+    "static AWS credentials",
+    "changes to ecs-rollout-placeholder",
+    "changes to public-verification-placeholder"
+  ],
+  "reviewOutcomes": [
+    "permission_widening_blocked",
+    "permission_widening_review_required",
+    "permission_widening_ready_for_placeholder_patch"
+  ],
+  "notes": [
+    "Planning artifact only.",
+    "Not a workflow patch or permission token.",
+    "Does not authorize live permission changes."
+  ]
+}

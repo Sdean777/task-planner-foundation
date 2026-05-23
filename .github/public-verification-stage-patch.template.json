@@ -1,0 +1,49 @@
+{
+  "patchedJob": "public-verification-placeholder",
+  "patchVersion": "v1",
+  "activationGuard": [
+    "github.ref == refs/heads/main",
+    "inputs.target_environment == production",
+    "inputs.image_tag starts with sha-",
+    "inputs.image_tag != sha-<git-sha>",
+    "vars.FOUNDATION_PUBLIC_BASE_URL is present",
+    "vars.FOUNDATION_PUBLIC_BASE_URL starts with http:// or https://"
+  ],
+  "jobLocalPermissions": [
+    "inherits workflow-level contents: read only"
+  ],
+  "addedThirdJobBehavior": [
+    "show bounded public verification activation posture",
+    "derive trailing-slash-safe PUBLIC_BASE_URL from FOUNDATION_PUBLIC_BASE_URL",
+    "verify blocking endpoints /health, /status, /validate, and /orchestrate",
+    "verify warning-bearing /telemetry endpoint",
+    "record keep_active or manual_review_required outcome on success",
+    "record rollback_required outcome on failure"
+  ],
+  "preservedLines": [
+    "public-verification-placeholder",
+    "needs: ecs-rollout-placeholder",
+    "workflow-level permissions: contents: read",
+    "workflow_dispatch-only trigger",
+    "push-image-placeholder behavior unchanged",
+    "ecs-rollout-placeholder behavior unchanged"
+  ],
+  "stillForbiddenActions": [
+    "Modify push-image-placeholder",
+    "Modify ecs-rollout-placeholder",
+    "Widen workflow-level permissions",
+    "Commit production endpoint URLs",
+    "Add static AWS credentials",
+    "Change app.py"
+  ],
+  "outcome": [
+    "public_verification_stage_patch_applied",
+    "public_verification_stage_patch_third_job_only",
+    "public_verification_stage_patch_upstream_jobs_unchanged"
+  ],
+  "notes": [
+    "Planning artifact only.",
+    "Records the first bounded live public verification workflow patch.",
+    "Does not authorize push-image or rollout widening."
+  ]
+}

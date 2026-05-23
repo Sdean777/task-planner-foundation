@@ -1,0 +1,44 @@
+{
+  "reviewedSurface": "github-hosted-public-runtime-smoke-workflow-dispatch",
+  "reviewVersion": "v1",
+  "requiredEvidence": {
+    "smokeWorkflowFilePresent": true,
+    "smokeWorkflowDispatchOnly": true,
+    "smokeWorkflowPermissionsContentsRead": true,
+    "smokeWorkflowUsesRepositoryVariableBaseUrl": true,
+    "smokeWorkflowReadOnlyScopePreserved": true,
+    "stableAlbBaseUrlExists": true,
+    "acceptedRuntimeRevisionSteady": true,
+    "telemetryRuntimeIdentityAligned": true,
+    "firstBoundedSmokeAutomationRunStable": true,
+    "deploymentWorkflowUnchangedInThisReview": true,
+    "cleanSecretsPosture": true
+  },
+  "allowedHostedDispatchProperties": [
+    "Repository-backed manual workflow_dispatch only",
+    "Non-secret FOUNDATION_PUBLIC_BASE_URL repository variable",
+    "Read-only endpoint verification only",
+    "Summary-only outcome reporting",
+    "No deployment, rollback, or routing authority"
+  ],
+  "stillForbiddenActions": [
+    "Run the GitHub-hosted workflow dispatch in this mission",
+    "Modify public-runtime-smoke.yml in this mission",
+    "Modify deploy-foundation-skeleton.yml in this mission",
+    "Add schedule, workflow_run, push, or pull_request triggers",
+    "Widen workflow permissions beyond contents: read",
+    "Add AWS auth or mutation commands",
+    "Hardcode the live public base URL in workflow source",
+    "Introduce rollback or remediation authority"
+  ],
+  "reviewOutcomes": [
+    "hosted_dispatch_blocked",
+    "hosted_dispatch_review_required",
+    "hosted_dispatch_candidate_ready"
+  ],
+  "notes": [
+    "Planning artifact only.",
+    "Hosted smoke dispatch remains subordinate to the existing release-gate and deployment workflow chain.",
+    "Not a workflow run and not an approval token."
+  ]
+}

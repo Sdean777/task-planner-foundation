@@ -1,0 +1,49 @@
+{
+  "candidateJob": "push-image-placeholder",
+  "proposalVersion": "v1",
+  "allowedProposedDiffShape": [
+    "change only push-image-placeholder",
+    "keep ecs-rollout-placeholder disabled",
+    "keep public-verification-placeholder disabled",
+    "keep workflow_dispatch-only trigger",
+    "keep workflow service-scoped to task-planner-foundation",
+    "keep workflow-level permissions at contents: read"
+  ],
+  "allowedProposedPatchBoundaries": [
+    "re-evaluate only the if: ${{ false }} gate for push-image-placeholder",
+    "job-local permissions no wider than contents: read plus id-token: write",
+    "single job-local auth-action shape already defined by placeholders",
+    "single job-local ECR-login command shape already defined by placeholders",
+    "single job-local image-push shape subordinate to immutable sha-<git-sha> rollout identity",
+    "preserve explicit later-job disablement"
+  ],
+  "recheckEvidence": [
+    "live-enable candidate review still allows push-image-placeholder",
+    "app.py unchanged",
+    "protected environment posture still production on main",
+    "OIDC trust posture still valid",
+    "immutable tag rule still requires sha-<git-sha>",
+    "release-gate posture still present",
+    "clean secrets posture",
+    "later jobs still disabled",
+    "workflow-level permissions still contents: read"
+  ],
+  "proposalOutcomes": [
+    "live_enable_proposal_blocked",
+    "live_enable_proposal_review_required",
+    "live_enable_proposal_ready_for_controlled_patch_review"
+  ],
+  "stillForbiddenActions": [
+    "Modify ecs-rollout-placeholder",
+    "Modify public-verification-placeholder",
+    "Enable any job",
+    "Widen workflow-level permissions",
+    "Add live AWS-mutating behavior",
+    "Bypass immutable tag, rollback, or release-gate posture"
+  ],
+  "notes": [
+    "Planning artifact only.",
+    "Not a patch or workflow control plane.",
+    "Does not authorize workflow enablement."
+  ]
+}

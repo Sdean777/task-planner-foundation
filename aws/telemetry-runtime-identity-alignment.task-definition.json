@@ -1,0 +1,50 @@
+{
+  "family": "task-planner-foundation",
+  "taskRoleArn": "arn:aws:iam::329601960228:role/ecsTaskExecutionRole-deanzelite",
+  "executionRoleArn": "arn:aws:iam::329601960228:role/ecsTaskExecutionRole-deanzelite",
+  "networkMode": "awsvpc",
+  "containerDefinitions": [
+    {
+      "name": "task-planner-foundation",
+      "image": "329601960228.dkr.ecr.us-east-1.amazonaws.com/task-planner-foundation:sha-6e926501b3ebee8e73e83fc8e445537d3a7a4494",
+      "cpu": 0,
+      "portMappings": [
+        {
+          "containerPort": 8081,
+          "hostPort": 8081,
+          "protocol": "tcp",
+          "name": "http-8081"
+        }
+      ],
+      "essential": true,
+      "environment": [
+        {
+          "name": "FLASK_PORT",
+          "value": "8081"
+        },
+        {
+          "name": "PYTHONUNBUFFERED",
+          "value": "1"
+        }
+      ],
+      "mountPoints": [],
+      "volumesFrom": [],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/deanz-elite/task-planner-foundation",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "systemControls": []
+    }
+  ],
+  "volumes": [],
+  "placementConstraints": [],
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "cpu": "256",
+  "memory": "512"
+}

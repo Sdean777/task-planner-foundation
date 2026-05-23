@@ -1,0 +1,36 @@
+{
+  "patchedWorkflowPath": ".github/workflows/public-runtime-smoke.yml",
+  "patchVersion": "v1",
+  "triggerShape": {
+    "workflowDispatchOnly": true
+  },
+  "workflowLevelPermissions": {
+    "contents": "read"
+  },
+  "jobShape": {
+    "jobName": "public-runtime-smoke",
+    "runtimeInputSource": "vars.FOUNDATION_PUBLIC_BASE_URL",
+    "derivedVariable": "PUBLIC_BASE_URL",
+    "roundCount": 3,
+    "roundSpacingSeconds": 5,
+    "summaryOnlyOutcome": true
+  },
+  "allowedCommands": [
+    "curl",
+    "jq",
+    "sleep"
+  ],
+  "forbiddenCapabilities": [
+    "Modify deploy-foundation-skeleton.yml",
+    "Add schedule or workflow_run triggers",
+    "Add AWS auth or mutation commands",
+    "Hardcode the live public base URL",
+    "Auto-roll back on smoke failure",
+    "Bundle smoke automation with rollout or image push logic"
+  ],
+  "notes": [
+    "Patch artifact only.",
+    "Describes the created read-only workflow shape.",
+    "Not a workflow control plane and not an approval token."
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "candidateJob": "push-image-placeholder",
+  "pushShapeReviewVersion": "v1",
+  "allowedFuturePushPlacement": [
+    "single job-local push step inside push-image-placeholder",
+    "after a future OIDC auth step",
+    "after a future ECR login step",
+    "before any future ECS rollout step"
+  ],
+  "allowedFuturePushInputs": [
+    "immutable sha-<git-sha> image tag as rollout truth",
+    "optional main convenience tag only if sha tag remains authoritative",
+    "explicit ECR registry and repository from approved non-secret boundaries"
+  ],
+  "requiredUpstreamEvidence": [
+    "app.py unchanged",
+    "push-image-placeholder still disabled",
+    "OIDC auth-placeholder patch intact",
+    "ECR-login placeholder patch intact",
+    "OIDC trust posture still valid",
+    "immutable sha tag rule still valid",
+    "rollout contract still valid",
+    "later jobs unchanged and disabled",
+    "clean secrets posture"
+  ],
+  "mustRemainAbsent": [
+    "live OIDC auth action",
+    "live ECR login commands",
+    "live docker push commands",
+    "ECS rollout commands",
+    "static AWS credentials",
+    "changes to ecs-rollout-placeholder",
+    "changes to public-verification-placeholder"
+  ],
+  "reviewOutcomes": [
+    "image_push_shape_blocked",
+    "image_push_shape_review_required",
+    "image_push_shape_ready_for_placeholder_push_patch"
+  ],
+  "notes": [
+    "Planning artifact only.",
+    "Not a workflow patch or registry mutation token.",
+    "Does not authorize live image push."
+  ]
+}

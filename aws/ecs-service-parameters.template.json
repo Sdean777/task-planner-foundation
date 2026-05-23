@@ -1,0 +1,43 @@
+{
+  "serviceName": "task-planner-foundation",
+  "deploymentEnvironment": "<ENVIRONMENT_NAME>",
+  "awsRegion": "<AWS_REGION>",
+  "awsAccountId": "<AWS_ACCOUNT_ID>",
+  "ecrRepositoryUri": "<AWS_ACCOUNT_ID>.dkr.ecr.<AWS_REGION>.amazonaws.com/task-planner-foundation",
+  "ecsClusterName": "<ECS_CLUSTER_NAME>",
+  "ecsServiceName": "<ECS_SERVICE_NAME>",
+  "taskDefinitionFamily": "task-planner-foundation",
+  "containerName": "task-planner-foundation",
+  "containerPort": 8081,
+  "healthCheckPath": "/health",
+  "desiredCount": 1,
+  "cpu": "256",
+  "memory": "512",
+  "launchType": "FARGATE",
+  "networkMode": "awsvpc",
+  "publicBaseUrl": "<PUBLIC_BASE_URL>",
+  "logGroupName": "/deanz-elite/task-planner-foundation",
+  "logStreamPrefix": "ecs",
+  "executionRoleArn": "arn:aws:iam::<AWS_ACCOUNT_ID>:role/task-planner-foundation-execution-role",
+  "taskRoleArn": "arn:aws:iam::<AWS_ACCOUNT_ID>:role/task-planner-foundation-task-role",
+  "vpcId": "<VPC_ID>",
+  "subnetIds": [
+    "<SUBNET_ID_1>",
+    "<SUBNET_ID_2>"
+  ],
+  "securityGroupIds": [
+    "<SECURITY_GROUP_ID>"
+  ],
+  "targetGroupArn": "<TARGET_GROUP_ARN>",
+  "albArn": "<ALB_ARN>",
+  "environmentVariables": {
+    "FLASK_PORT": "8081",
+    "PYTHONUNBUFFERED": "1"
+  },
+  "secretSources": [],
+  "notes": [
+    "Planning artifact only.",
+    "Do not store real secrets in this file.",
+    "Keep application code and runtime parameter changes separate."
+  ]
+}

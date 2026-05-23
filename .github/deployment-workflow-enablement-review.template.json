@@ -1,0 +1,47 @@
+{
+  "workflowName": "Foundation Deployment Skeleton",
+  "reviewVersion": "v1",
+  "candidateJobsInOrder": [
+    "push-image-placeholder",
+    "ecs-rollout-placeholder",
+    "public-verification-placeholder"
+  ],
+  "jobEvidence": {
+    "push-image-placeholder": [
+      "github-oidc-deployment-trust-contract",
+      "ecr-image-promotion-contract",
+      "deployment-workflow-activation-gate",
+      "protected-deployment-environment-contract",
+      "clean-secrets-posture"
+    ],
+    "ecs-rollout-placeholder": [
+      "push-image-placeholder-evidence",
+      "ecs-runtime-contract",
+      "ecs-service-runbook",
+      "ecs-parameter-environment-contract",
+      "ecs-identity-access-boundary",
+      "rollback-to-previous-revision-posture"
+    ],
+    "public-verification-placeholder": [
+      "ecs-rollout-placeholder-evidence",
+      "public-runtime-verification-release-gate-contract",
+      "revision-blocking-and-rollback-outcomes"
+    ]
+  },
+  "reviewOutcomes": [
+    "enablement_blocked",
+    "enablement_review_required",
+    "single_job_enablement_candidate_allowed"
+  ],
+  "rules": {
+    "singleJobOnly": true,
+    "noBundledAppChanges": true,
+    "noCredentialShortcuts": true,
+    "laterStagesBlockedUntilEarlierReviewSatisfied": true
+  },
+  "notes": [
+    "Planning artifact only.",
+    "Not an approval system or workflow control plane.",
+    "Does not enable any workflow job."
+  ]
+}

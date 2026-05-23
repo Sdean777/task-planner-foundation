@@ -1,0 +1,44 @@
+{
+  "candidateJob": "ecs-rollout-placeholder",
+  "proposalVersion": "v1",
+  "proposedDiffScope": {
+    "onlyJob": "ecs-rollout-placeholder",
+    "preservePushImageBehavior": true,
+    "preservePublicVerificationDisabled": true,
+    "preserveWorkflowDispatchOnly": true,
+    "preserveWorkflowLevelPermissionsContentsRead": true,
+    "preserveServiceScope": "task-planner-foundation"
+  },
+  "proposalOnlyCommands": [
+    "aws ecs register-task-definition",
+    "aws ecs update-service"
+  ],
+  "recheckEvidence": {
+    "rolloutStageCandidateReviewStillSatisfied": true,
+    "firstBoundedEcrPublicationStillVerified": true,
+    "immutableShaImageStillPresent": true,
+    "mainStillMatchesImmutableDigest": true,
+    "pushImagePathStillBounded": true,
+    "publicVerificationPlaceholderStillDisabled": true,
+    "appPyUnchanged": true,
+    "rolloutAndReleaseGateContractsPresent": true,
+    "cleanSecretsPosture": true
+  },
+  "proposalOutcomes": [
+    "rollout_stage_proposal_blocked",
+    "rollout_stage_proposal_review_required",
+    "rollout_stage_proposal_ready_for_controlled_patch_review"
+  ],
+  "stillForbiddenActions": [
+    "Enable ecs-rollout-placeholder",
+    "Enable public-verification-placeholder",
+    "Modify push-image-placeholder",
+    "Widen workflow-level permissions",
+    "Bundle app changes with rollout proposal"
+  ],
+  "notes": [
+    "Planning artifact only.",
+    "Not a patch or workflow control plane.",
+    "Does not enable any workflow job."
+  ]
+}

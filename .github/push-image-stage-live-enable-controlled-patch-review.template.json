@@ -1,0 +1,51 @@
+{
+  "reviewedJob": "push-image-placeholder",
+  "reviewVersion": "v1",
+  "allowedReviewedPatchShape": [
+    "change only push-image-placeholder",
+    "preserve needs: activation-gate-summary",
+    "preserve job name push-image-placeholder",
+    "preserve workflow_dispatch-only trigger",
+    "preserve workflow-level permissions at contents: read",
+    "preserve later jobs as disabled and unchanged",
+    "preserve immutable sha-<git-sha> rollout identity"
+  ],
+  "allowedReviewedPatchContent": [
+    "re-evaluated first-job if gate",
+    "job-local permissions no wider than contents: read plus id-token: write",
+    "single job-local auth-action shape already defined by placeholders",
+    "single job-local ECR-login command shape already defined by placeholders",
+    "single job-local image-push shape subordinate to immutable rollout identity",
+    "clarifying comments preserving later-job disablement and release-gate posture"
+  ],
+  "requiredPreservedPosture": [
+    "app.py unchanged",
+    "push-image-placeholder remains only in-scope job",
+    "later jobs unchanged and disabled",
+    "container-build verification present",
+    "OIDC trust posture remains bounded",
+    "immutable tag posture remains sha-<git-sha>",
+    "protected environment posture remains production on main",
+    "release-gate posture remains present",
+    "clean secrets posture",
+    "workflow-level permissions still contents: read"
+  ],
+  "reviewOutcomes": [
+    "live_enable_controlled_patch_blocked",
+    "live_enable_controlled_patch_review_required",
+    "live_enable_controlled_patch_ready_for_patch_mission"
+  ],
+  "stillForbiddenActions": [
+    "Modify ecs-rollout-placeholder",
+    "Modify public-verification-placeholder",
+    "Widen workflow-level permissions",
+    "Bypass immutable tag, rollback, or release-gate posture",
+    "Change app.py",
+    "Introduce static AWS credentials"
+  ],
+  "notes": [
+    "Planning artifact only.",
+    "Not a workflow control plane or patch token.",
+    "Does not authorize workflow mutation in this mission."
+  ]
+}

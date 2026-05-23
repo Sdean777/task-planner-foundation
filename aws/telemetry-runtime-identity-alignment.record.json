@@ -1,0 +1,49 @@
+{
+  "mission": "Dean'z Elite OS — Telemetry Runtime Identity Alignment v1",
+  "status": "completed",
+  "sourceCommit": "6e926501b3ebee8e73e83fc8e445537d3a7a4494",
+  "publishedImageTag": "sha-6e926501b3ebee8e73e83fc8e445537d3a7a4494",
+  "publishedImageDigest": "sha256:51c566465b29f5b45be997cab629348374bbc883371249b4690f612f84ed4707",
+  "taskDefinitionBefore": "arn:aws:ecs:us-east-1:329601960228:task-definition/task-planner-foundation:1",
+  "taskDefinitionAfter": "arn:aws:ecs:us-east-1:329601960228:task-definition/task-planner-foundation:2",
+  "publicBaseUrl": "http://deanzelite-alb-2130825976.us-east-1.elb.amazonaws.com:8081",
+  "serviceState": {
+    "cluster": "task-planner-foundation",
+    "service": "task-planner-foundation",
+    "desiredCount": 1,
+    "runningCount": 1,
+    "pendingCount": 0,
+    "rolloutState": "COMPLETED"
+  },
+  "targetHealth": {
+    "healthyTargetId": "172.31.85.108",
+    "healthyTargetPort": 8081,
+    "healthyTargetState": "healthy"
+  },
+  "publicVerification": {
+    "healthPassed": true,
+    "statusPassed": true,
+    "validatePassed": true,
+    "orchestratePassed": true,
+    "telemetryPassed": true,
+    "telemetryRuntime": "AWS ECS Fargate",
+    "telemetryInfrastructure": "AWS ALB + ECS Fargate",
+    "releaseGateOutcome": "keep_active"
+  },
+  "cloudWatchEvidence": {
+    "logGroup": "/deanz-elite/task-planner-foundation",
+    "latestLogStream": "ecs/task-planner-foundation/8785568483b04e5faba06a6f63b98dd4"
+  },
+  "mutations": {
+    "appPyChanged": true,
+    "workflowChanged": false,
+    "ecsServiceUpdated": true,
+    "routingUpdated": false
+  },
+  "notes": [
+    "The warning-bearing OpenShift runtime drift is cleared.",
+    "The old target was still draining during part of the rollout, but the service settled on revision 2 and the public checks passed against the new runtime identity.",
+    "The next bounded step is post-deploy public runtime smoke tests."
+  ],
+  "nextMission": "Post-Deploy Public Runtime Smoke Tests v1"
+}

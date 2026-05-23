@@ -1,0 +1,46 @@
+{
+  "candidateJob": "public-verification-placeholder",
+  "reviewVersion": "v1",
+  "reviewedPatchScope": {
+    "onlyJob": "public-verification-placeholder",
+    "preservePushImageBehavior": true,
+    "preserveEcsRolloutBehavior": true,
+    "preserveWorkflowDispatchOnly": true,
+    "preserveWorkflowLevelPermissionsContentsRead": true,
+    "preserveServiceScope": "task-planner-foundation"
+  },
+  "allowedReviewedCommands": [
+    "curl",
+    "wget",
+    "Equivalent public runtime probe commands"
+  ],
+  "preservedPosture": {
+    "firstBoundedEcrPublicationStillVerified": true,
+    "ecsServiceBaselineStillSteady": true,
+    "releaseGateOrderStillPresent": true,
+    "rollbackPostureStillRequired": true,
+    "pushImagePathStillUnchanged": true,
+    "ecsRolloutPathStillUnchanged": true,
+    "appPyUnchanged": true,
+    "noCommittedProductionEndpointUrls": true,
+    "cleanSecretsPosture": true
+  },
+  "reviewOutcomes": [
+    "public_verification_stage_controlled_patch_blocked",
+    "public_verification_stage_controlled_patch_review_required",
+    "public_verification_stage_controlled_patch_ready_for_patch_mission"
+  ],
+  "stillForbiddenActions": [
+    "Modify push-image-placeholder",
+    "Modify ecs-rollout-placeholder",
+    "Widen workflow-level permissions",
+    "Commit production endpoint URLs",
+    "Bypass release-gate order or rollback posture",
+    "Bundle app changes with public verification patch"
+  ],
+  "notes": [
+    "Planning artifact only.",
+    "Not a patch or workflow control plane.",
+    "Does not enable any workflow job."
+  ]
+}

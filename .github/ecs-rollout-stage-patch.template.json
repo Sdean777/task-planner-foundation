@@ -1,0 +1,54 @@
+{
+  "patchedJob": "ecs-rollout-placeholder",
+  "patchVersion": "v1",
+  "activationGuard": [
+    "github.ref == refs/heads/main",
+    "inputs.target_environment == production",
+    "inputs.image_tag starts with sha-",
+    "inputs.image_tag != sha-<git-sha>",
+    "vars.AWS_ACCOUNT_ID is present",
+    "vars.AWS_REGION is present",
+    "vars.ECS_CLUSTER_NAME is present",
+    "vars.ECS_SERVICE_NAME is present"
+  ],
+  "jobLocalPermissions": [
+    "contents: read",
+    "id-token: write"
+  ],
+  "addedSecondJobBehavior": [
+    "checkout source for task-definition template access",
+    "show bounded rollout activation posture",
+    "derive bounded rollout coordinates",
+    "configure GitHub OIDC AWS credentials",
+    "confirm immutable image input exists in ECR",
+    "render bounded task-definition candidate from committed template",
+    "capture previous ECS service task definition",
+    "register bounded ECS task definition revision",
+    "update ECS service to new bounded task definition revision"
+  ],
+  "preservedLines": [
+    "ecs-rollout-placeholder",
+    "needs: push-image-placeholder",
+    "workflow-level permissions: contents: read",
+    "workflow_dispatch-only trigger",
+    "push-image-placeholder behavior unchanged",
+    "public-verification-placeholder still disabled"
+  ],
+  "stillForbiddenActions": [
+    "Modify push-image-placeholder",
+    "Enable public-verification-placeholder",
+    "Widen workflow-level permissions",
+    "Add static AWS credentials",
+    "Change app.py"
+  ],
+  "outcome": [
+    "rollout_stage_patch_applied",
+    "rollout_stage_patch_second_job_only",
+    "rollout_stage_patch_public_verification_still_disabled"
+  ],
+  "notes": [
+    "Planning artifact only.",
+    "Records the first bounded live rollout workflow patch.",
+    "Does not authorize public-verification widening."
+  ]
+}

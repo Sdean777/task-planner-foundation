@@ -1,0 +1,42 @@
+{
+  "candidateJob": "ecs-rollout-placeholder",
+  "reviewVersion": "v1",
+  "requiredEvidence": {
+    "foundationPreserved": true,
+    "containerBuildVerificationWorkflowPresent": true,
+    "firstBoundedEcrPublicationCompleted": true,
+    "immutableShaImagePublished": true,
+    "mainMirrorMatchesImmutableDigest": true,
+    "pushImagePathBoundedLive": true,
+    "ecsRolloutPlaceholderStillDisabled": true,
+    "publicVerificationPlaceholderStillDisabled": true,
+    "workflowLevelPermissionsStillContentsRead": true,
+    "ecsRuntimeContractPresent": true,
+    "ecsServiceRunbookPresent": true,
+    "ecsServiceParameterizationContractPresent": true,
+    "ecsIdentityAccessBoundaryPresent": true,
+    "githubOidcTrustContractPresent": true,
+    "ecrImagePromotionRolloutContractPresent": true,
+    "publicRuntimeReleaseGateContractPresent": true,
+    "cleanSecretsPosture": true,
+    "noLiveEcsMutationCommandsInWorkflow": true
+  },
+  "reviewOutcomes": [
+    "rollout_stage_blocked",
+    "rollout_stage_review_required",
+    "rollout_stage_candidate_ready"
+  ],
+  "stillForbiddenActions": [
+    "Enable ecs-rollout-placeholder",
+    "Invoke aws ecs register-task-definition",
+    "Invoke aws ecs update-service",
+    "Enable public-verification-placeholder",
+    "Use main as rollout truth without sha linkage",
+    "Bundle app changes with rollout review"
+  ],
+  "notes": [
+    "Planning artifact only.",
+    "Not an approval token or workflow control plane.",
+    "Does not enable any workflow job."
+  ]
+}

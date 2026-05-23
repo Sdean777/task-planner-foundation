@@ -1,0 +1,59 @@
+{
+  "serviceName": "task-planner-foundation",
+  "boundaryVersion": "v1",
+  "executionRole": {
+    "roleName": "task-planner-foundation-execution-role",
+    "purpose": "ECS runtime startup, image retrieval, and log delivery",
+    "allowedCapabilities": [
+      "Pull image from the service-scoped ECR repository",
+      "Write container logs to the service-scoped CloudWatch log group"
+    ],
+    "forbiddenCapabilities": [
+      "Mutate ECS services",
+      "Administer IAM",
+      "Broadly read application data",
+      "Administer Secrets Manager"
+    ]
+  },
+  "taskRole": {
+    "roleName": "task-planner-foundation-task-role",
+    "purpose": "Runtime identity for the Flask foundation container",
+    "allowedCapabilities": [],
+    "futureConditionalCapabilities": [
+      "Read service-scoped parameters from AWS Systems Manager Parameter Store",
+      "Read service-scoped secrets from AWS Secrets Manager"
+    ],
+    "forbiddenCapabilities": [
+      "Wildcard AWS access",
+      "ECR administration",
+      "ECS service mutation",
+      "IAM mutation"
+    ]
+  },
+  "futureGithubOidcDeploymentRole": {
+    "roleName": "task-planner-foundation-github-oidc-deploy-role",
+    "status": "deferred",
+    "purpose": "Future GitHub Actions deployment identity without long-lived AWS secrets",
+    "allowedCapabilities": [
+      "Push image to the service ECR repository",
+      "Register ECS task definition revisions",
+      "Update the ECS service to a new task definition"
+    ],
+    "forbiddenCapabilities": [
+      "Broad account administration",
+      "Wildcard IAM management",
+      "Organization-wide infrastructure control",
+      "Long-lived AWS keys in GitHub secrets"
+    ]
+  },
+  "serviceScopedResources": {
+    "ecrRepositoryName": "task-planner-foundation",
+    "cloudWatchLogGroupName": "/deanz-elite/task-planner-foundation",
+    "taskDefinitionFamily": "task-planner-foundation"
+  },
+  "notes": [
+    "Planning artifact only.",
+    "Not an IAM policy or trust policy.",
+    "Do not store real credentials or live ARNs here."
+  ]
+}

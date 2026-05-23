@@ -1,0 +1,59 @@
+{
+  "mission": "Dean'z Elite OS — Public Routing Baseline Standup v1",
+  "status": "completed",
+  "routingResources": {
+    "loadBalancerArn": "arn:aws:elasticloadbalancing:us-east-1:329601960228:loadbalancer/app/deanzelite-alb/6c71a2d9ebd24918",
+    "loadBalancerDnsName": "deanzelite-alb-2130825976.us-east-1.elb.amazonaws.com",
+    "listenerArn": "arn:aws:elasticloadbalancing:us-east-1:329601960228:listener/app/deanzelite-alb/6c71a2d9ebd24918/b9754c82818e5a19",
+    "listenerProtocol": "HTTP",
+    "listenerPort": 8081,
+    "targetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:329601960228:targetgroup/task-planner-foundation-tg/fded6d04a1294f24",
+    "targetGroupName": "task-planner-foundation-tg",
+    "targetPort": 8081,
+    "healthCheckPath": "/health"
+  },
+  "securityBoundary": {
+    "albSecurityGroupId": "sg-07fce31d4ae9be1d4",
+    "albIngressRuleId": "sgr-0d4e723fb59d2408a",
+    "ecsTaskSecurityGroupId": "sg-0538f40fa41c92d64",
+    "ecsIngressRuleId": "sgr-015c272a44bf50856",
+    "allowedPort": 8081
+  },
+  "serviceAttachment": {
+    "clusterName": "task-planner-foundation",
+    "serviceName": "task-planner-foundation",
+    "containerName": "task-planner-foundation",
+    "containerPort": 8081,
+    "attachedTargetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:329601960228:targetgroup/task-planner-foundation-tg/fded6d04a1294f24"
+  },
+  "stableBaseUrl": {
+    "foundationPublicBaseUrl": "http://deanzelite-alb-2130825976.us-east-1.elb.amazonaws.com:8081",
+    "routingVerified": true,
+    "healthResponse": {
+      "status": "online"
+    }
+  },
+  "targetHealth": {
+    "state": "healthy",
+    "targetIp": "172.31.12.8",
+    "targetPort": 8081
+  },
+  "serviceStateAtCapture": {
+    "desiredCount": 1,
+    "runningCount": 1,
+    "pendingCount": 0,
+    "primaryRolloutState": "COMPLETED"
+  },
+  "preservedBoundaries": {
+    "appPyChanged": false,
+    "pushImageBehaviorChanged": false,
+    "ecsRolloutBehaviorChanged": false,
+    "credentialsAddedToSource": false
+  },
+  "notes": [
+    "A dedicated HTTP :8081 listener was chosen because the existing HTTPS 443 listener already forwards all traffic to the current default target group.",
+    "The Flask foundation service exposes root-path endpoints only, so path-prefix routing without rewrite was intentionally avoided.",
+    "The routing baseline uses a shared existing ALB and is a bootstrap public surface, not the final polished edge contract."
+  ],
+  "nextMission": "Second Bounded Public Verification Run v1"
+}

@@ -1,0 +1,38 @@
+{
+  "candidateJob": "push-image-placeholder",
+  "authShapeReviewVersion": "v1",
+  "allowedFuturePermissions": [
+    "contents: read",
+    "id-token: write"
+  ],
+  "allowedFutureAuthPlacement": [
+    "single job-local auth step inside push-image-placeholder",
+    "before any future ECR login or push step",
+    "after activation-gate-summary remains unchanged"
+  ],
+  "requiredTrustReferences": [
+    "repository: Sdean777/task-planner-foundation",
+    "ref: refs/heads/main",
+    "environment: production",
+    "audience: sts.amazonaws.com"
+  ],
+  "mustRemainAbsent": [
+    "aws-access-key-id",
+    "aws-secret-access-key",
+    "aws ecr commands",
+    "docker login",
+    "docker push",
+    "changes to ecs-rollout-placeholder",
+    "changes to public-verification-placeholder"
+  ],
+  "reviewOutcomes": [
+    "auth_shape_blocked",
+    "auth_shape_review_required",
+    "auth_shape_ready_for_placeholder_auth_patch"
+  ],
+  "notes": [
+    "Planning artifact only.",
+    "Not a workflow patch or auth token.",
+    "Does not authorize live AWS authentication."
+  ]
+}

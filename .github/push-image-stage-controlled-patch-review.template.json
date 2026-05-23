@@ -1,0 +1,43 @@
+{
+  "candidateJob": "push-image-placeholder",
+  "patchReviewVersion": "v1",
+  "allowedPatchScope": [
+    "comments directly above push-image-placeholder",
+    "job-local explanatory lines inside push-image-placeholder",
+    "placeholder echo lines inside push-image-placeholder"
+  ],
+  "requiredPreservedLines": [
+    "if: ${{ false }}",
+    "needs: activation-gate-summary",
+    "workflow_dispatch-only trigger",
+    "task-planner-foundation service scope"
+  ],
+  "requiredEvidence": [
+    "app.py unchanged",
+    "later jobs unchanged and disabled",
+    "container build verification still present",
+    "GitHub OIDC trust posture still planning-only",
+    "immutable sha tag rule still valid",
+    "protected environment posture still valid",
+    "clean secrets posture"
+  ],
+  "reviewOutcomes": [
+    "controlled_patch_blocked",
+    "controlled_patch_review_required",
+    "controlled_patch_ready_for_placeholder_patch"
+  ],
+  "stillForbiddenActions": [
+    "Enable push-image-placeholder",
+    "Modify ecs-rollout-placeholder",
+    "Modify public-verification-placeholder",
+    "Add AWS authentication",
+    "Add ECR login",
+    "Add docker push",
+    "Add any real AWS mutating command"
+  ],
+  "notes": [
+    "Planning artifact only.",
+    "Not a patch token or workflow control plane.",
+    "Does not authorize workflow mutation."
+  ]
+}

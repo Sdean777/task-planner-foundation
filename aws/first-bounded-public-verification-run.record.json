@@ -1,0 +1,50 @@
+{
+  "mission": "Dean'z Elite OS — First Bounded Public Verification Run v1",
+  "status": "blocked",
+  "blockedReason": "missing stable non-secret FOUNDATION_PUBLIC_BASE_URL",
+  "preflight": {
+    "ecsService": {
+      "clusterName": "task-planner-foundation",
+      "serviceName": "task-planner-foundation",
+      "steady": true,
+      "desiredCount": 1,
+      "runningCount": 1,
+      "pendingCount": 0,
+      "loadBalancerAttached": false,
+      "serviceRegistryPresent": false,
+      "taskDefinition": "arn:aws:ecs:us-east-1:329601960228:task-definition/task-planner-foundation:1"
+    },
+    "taskNetwork": {
+      "taskArn": "arn:aws:ecs:us-east-1:329601960228:task/task-planner-foundation/e0a3f7ccebd14d68954086ee2f4acefe",
+      "networkInterfaceId": "eni-03cba2d85c74f8852",
+      "publicDnsName": "ec2-34-237-138-71.compute-1.amazonaws.com",
+      "publicIp": "34.237.138.71",
+      "ephemeralPublicAddressAcceptedAsBaseUrl": false
+    },
+    "securityBoundary": {
+      "groupId": "sg-0538f40fa41c92d64",
+      "directInternetIngressAllowed": false,
+      "allowedSourceSecurityGroup": "sg-07fce31d4ae9be1d4",
+      "allowedPort": 3000
+    },
+    "stableFoundationPublicBaseUrlEstablished": false
+  },
+  "mutations": {
+    "publicVerificationAttempted": false,
+    "routingMutated": false,
+    "ecsServiceUpdated": false
+  },
+  "preservedBoundaries": {
+    "appPyChanged": false,
+    "pushImageBehaviorChangedDuringRun": false,
+    "ecsRolloutBehaviorChangedDuringRun": false,
+    "credentialsAddedToSource": false
+  },
+  "notes": [
+    "The ECS service baseline is steady, but it has no attached load balancer or service registry.",
+    "The task ENI has a public IP and DNS name, but those are task-level and not accepted as a stable FOUNDATION_PUBLIC_BASE_URL.",
+    "The task security group only allows inbound tcp/3000 from the ALB security group, so there is no direct public ingress path for bounded workflow verification.",
+    "The correct next step is public routing baseline standup, not blind verification retry."
+  ],
+  "nextMission": "Public Routing Baseline Standup v1"
+}

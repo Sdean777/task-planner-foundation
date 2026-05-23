@@ -1,0 +1,130 @@
+name: Public Runtime Smoke
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  public-runtime-smoke:
+    runs-on: ubuntu-latest
+    env:
+      RAW_PUBLIC_BASE_URL: ${{ vars.FOUNDATION_PUBLIC_BASE_URL }}
+
+    steps:
+      - name: Show bounded smoke workflow posture
+        run: |
+          echo "Public runtime smoke patch v1."
+          echo "Read-only workflow."
+          echo "No deploy workflow mutation."
+          echo "No AWS auth or mutation commands."
+          echo "Three smoke rounds at five-second spacing."
+
+      - name: Derive public base URL
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [[ -z "${RAW_PUBLIC_BASE_URL:-}" ]]; then
+            echo "FOUNDATION_PUBLIC_BASE_URL is required."
+            exit 1
+          fi
+
+          if [[ "${RAW_PUBLIC_BASE_URL}" != http://* && "${RAW_PUBLIC_BASE_URL}" != https://* ]]; then
+            echo "FOUNDATION_PUBLIC_BASE_URL must start with http:// or https://"
+            exit 1
+          fi
+
+          PUBLIC_BASE_URL="${RAW_PUBLIC_BASE_URL%/}"
+          echo "PUBLIC_BASE_URL=${PUBLIC_BASE_URL}" >> "$GITHUB_ENV"
+          echo "Derived smoke base URL: ${PUBLIC_BASE_URL}"
+
+      - name: Run bounded public runtime smoke rounds
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          summary_file="$(mktemp)"
+
+          verify_json_field() {
+            local response="$1"
+            local jq_filter="$2"
+            local expected="$3"
+            local actual
+
+            actual="$(printf '%s' "$response" | jq -r "$jq_filter")"
+            if [[ "$actual" != "$expected" ]]; then
+              echo "Expected ${jq_filter}=${expected}, got ${actual}"
+              return 1
+            fi
+          }
+
+          for round in 1 2 3; do
+            echo "Running smoke round ${round}/3"
+
+            root_response="$(curl --silent --show-error --fail "${PUBLIC_BASE_URL}/")"
+            if [[ "$root_response" != "Dean'z Elite OS Foundation Online" ]]; then
+              echo "Unexpected root response: ${root_response}"
+              exit 1
+            fi
+
+            health_response="$(curl --silent --show-error --fail "${PUBLIC_BASE_URL}/health")"
+            verify_json_field "$health_response" '.status' 'online'
+
+            status_response="$(curl --silent --show-error --fail "${PUBLIC_BASE_URL}/status")"
+            verify_json_field "$status_response" '.app' 'task-planner-foundation'
+            verify_json_field "$status_response" '.status' 'running'
+
+            tasks_response="$(curl --silent --show-error --fail "${PUBLIC_BASE_URL}/tasks")"
+            verify_json_field "$tasks_response" '.count' '0'
+
+            memory_response="$(curl --silent --show-error --fail "${PUBLIC_BASE_URL}/memory")"
+            verify_json_field "$memory_response" '.system' "Dean'z Elite OS"
+            verify_json_field "$memory_response" '.mode' 'foundation'
+
+            agent_response="$(curl --silent --show-error --fail "${PUBLIC_BASE_URL}/agent")"
+            verify_json_field "$agent_response" '.status' 'online'
+
+            telemetry_response="$(curl --silent --show-error --fail "${PUBLIC_BASE_URL}/telemetry")"
+            verify_json_field "$telemetry_response" '.runtime' 'AWS ECS Fargate'
+            verify_json_field "$telemetry_response" '.infrastructure' 'AWS ALB + ECS Fargate'
+            verify_json_field "$telemetry_response" '.status' 'online'
+
+            validate_response="$(curl --silent --show-error --fail "${PUBLIC_BASE_URL}/validate")"
+            verify_json_field "$validate_response" '.passed' 'true'
+            verify_json_field "$validate_response" '.validator' 'Foundation Validator'
+
+            orchestrate_response="$(curl --silent --show-error --fail "${PUBLIC_BASE_URL}/orchestrate")"
+            verify_json_field "$orchestrate_response" '.status' 'ready'
+            verify_json_field "$orchestrate_response" '.orchestrator' 'Foundation Orchestrator'
+
+            {
+              echo "### Smoke Round ${round}"
+              echo "- Root: Dean'z Elite OS Foundation Online"
+              echo "- Health: online"
+              echo "- Status: task-planner-foundation / running"
+              echo "- Tasks: 0"
+              echo "- Memory: Dean'z Elite OS / foundation"
+              echo "- Agent: online"
+              echo "- Telemetry: AWS ECS Fargate / AWS ALB + ECS Fargate"
+              echo "- Validate: true / Foundation Validator"
+              echo "- Orchestrate: ready / Foundation Orchestrator"
+            } >> "$summary_file"
+
+            if [[ "$round" -lt 3 ]]; then
+              sleep 5
+            fi
+          done
+
+          cat "$summary_file" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Record bounded smoke automation outcome
+        if: ${{ success() }}
+        run: |
+          {
+            echo "### Public Runtime Smoke Outcome"
+            echo "- Outcome: stable"
+            echo "- Base URL: ${PUBLIC_BASE_URL}"
+            echo "- Mode: read-only"
+          } >> "$GITHUB_STEP_SUMMARY"

@@ -1,0 +1,42 @@
+{
+  "patchedJob": "push-image-placeholder",
+  "patchVersion": "v1",
+  "preservedLines": [
+    "push-image-placeholder",
+    "if: ${{ false }}",
+    "needs: activation-gate-summary",
+    "workflow-level permissions: contents: read",
+    "workflow_dispatch-only trigger"
+  ],
+  "addedPlaceholderMessages": [
+    "Future job-local permission placement: on push-image-placeholder only.",
+    "Future job-local permission shape: contents: read plus id-token: write only.",
+    "Future workflow-level permission boundary: keep workflow-level permissions at contents: read.",
+    "Future later-stage jobs remain without permission changes.",
+    "No live permission change, auth action, login, push, or static credentials are allowed in this mission."
+  ],
+  "unchangedJobs": [
+    "activation-gate-summary",
+    "ecs-rollout-placeholder",
+    "public-verification-placeholder"
+  ],
+  "stillForbiddenActions": [
+    "Enable push-image-placeholder",
+    "Add a job-level permissions block",
+    "Change workflow-level permissions",
+    "Add auth commands",
+    "Add login commands",
+    "Add push commands",
+    "Add static AWS credentials"
+  ],
+  "outcome": [
+    "permission_placeholder_patch_applied",
+    "permission_placeholder_patch_still_disabled",
+    "permission_placeholder_patch_still_non_deploying"
+  ],
+  "notes": [
+    "Planning artifact only.",
+    "Records the first reviewed permission-placeholder hunk patch.",
+    "Does not authorize live permission changes."
+  ]
+}

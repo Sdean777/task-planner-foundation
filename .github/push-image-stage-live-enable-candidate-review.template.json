@@ -1,0 +1,42 @@
+{
+  "candidateJob": "push-image-placeholder",
+  "reviewVersion": "v1",
+  "requiredEvidence": {
+    "foundationPreserved": true,
+    "containerBuildVerificationWorkflowPresent": true,
+    "pushImagePlaceholderStillDisabled": true,
+    "workflowLevelPermissionsStillContentsRead": true,
+    "laterJobsStillDisabled": true,
+    "placeholderBoundPatchPresent": true,
+    "githubOidcAuthPlaceholderPatchPresent": true,
+    "ecrLoginPlaceholderPatchPresent": true,
+    "imagePushPlaceholderPatchPresent": true,
+    "pushJobPermissionPlaceholderPatchPresent": true,
+    "oidcAuthActionPlaceholderPatchPresent": true,
+    "ecrLoginCommandPlaceholderPatchPresent": true,
+    "protectedDeploymentEnvironmentContractPresent": true,
+    "githubOidcDeploymentTrustContractPresent": true,
+    "immutableTagRulePresent": true,
+    "publicRuntimeReleaseGateContractPresent": true,
+    "cleanSecretsPosture": true
+  },
+  "reviewOutcomes": [
+    "live_enable_blocked",
+    "live_enable_review_required",
+    "live_enable_candidate_ready"
+  ],
+  "stillForbiddenActions": [
+    "Enable push-image-placeholder",
+    "Add aws-actions/configure-aws-credentials@v4",
+    "Invoke aws ecr get-login-password",
+    "Invoke docker login",
+    "Invoke docker push",
+    "Advance ecs-rollout-placeholder",
+    "Advance public-verification-placeholder"
+  ],
+  "notes": [
+    "Planning artifact only.",
+    "Not an approval token or workflow control plane.",
+    "Does not enable any workflow job."
+  ]
+}
