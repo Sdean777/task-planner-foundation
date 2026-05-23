@@ -1,0 +1,40 @@
+{
+  "mission": "Dean'z Elite OS — CloudWatch Service Telemetry Metric Filter Proposal v1",
+  "status": "completed",
+  "proposalVerdict": "ready_for_controlled_patch_review",
+  "metricFilterShape": {
+    "logGroupName": "/deanz-elite/task-planner-foundation",
+    "filterPattern": "{ $.eventType = \"service_telemetry_snapshot\" }",
+    "metricNamespace": "DeanzElite/Foundation",
+    "metricName": "ServiceTelemetrySnapshotCount",
+    "metricValue": "1"
+  },
+  "antiCollisionBoundary": {
+    "atlasNamespaceReuseAllowed": false,
+    "blockedMetricNames": [
+      "runtimeTelemetry",
+      "atlasService",
+      "confidenceTelemetry",
+      "authorizationTelemetry",
+      "operatorSessionTelemetry",
+      "remoteRuntimeTelemetry",
+      "distributedCoordinationTelemetry",
+      "sandboxGovernanceTelemetry",
+      "promotionGovernanceTelemetry",
+      "failoverGovernanceTelemetry",
+      "scopedMemoryTelemetry"
+    ],
+    "foundationScopedNamespaceRequired": true
+  },
+  "outOfScope": [
+    "app.py changes",
+    "workflow changes",
+    "CloudWatch alarms",
+    "CloudWatch dashboards",
+    "CloudWatch subscriptions",
+    "retention-policy mutation",
+    "Atlas namespace reuse",
+    "sovereign OS telemetry consolidation"
+  ],
+  "nextMission": "CloudWatch Service Telemetry Metric Filter Controlled Patch Review v1"
+}

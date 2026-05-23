@@ -368,10 +368,15 @@ Current completed/active step:
 - CloudWatch service telemetry controlled patch review (`exact future app.py diff locked to one helper, one import, and one /telemetry emission call`)
 - CloudWatch service telemetry patch (`reviewed app.py diff implemented, immutable sha-a72c3be9ac74a70e841735e1cc6feebf9af08c62 rolled to task-planner-foundation:3, /telemetry response unchanged, and structured service_telemetry_snapshot confirmed in CloudWatch`)
 - CloudWatch service telemetry source publication (`publishes the local telemetry runtime commit, patch doctrine, patch evidence, and updated chain as tracked repository source`)
+- CloudWatch service telemetry metric-filter baseline review (`structured snapshot present, metric filters absent, alarms absent, and proposal stage now justified`)
+- CloudWatch service telemetry metric-filter proposal (`first metric filter scoped to DeanzElite/Foundation with explicit anti-collision boundary against Atlas and sovereign OS telemetry names`)
+- CloudWatch service telemetry metric-filter controlled patch review (`exact one-filter CloudWatch mutation locked to the foundation log group, namespace, and metric name with Atlas name reuse blocked`)
+- CloudWatch service telemetry metric-filter patch (`one reviewed metric filter created on /deanz-elite/task-planner-foundation, metric visible in DeanzElite/Foundation, and Atlas name reuse still blocked`)
+- CloudWatch service telemetry metric-filter source publication (`publishes the local metric-filter review, proposal, controlled review, patch doctrine, patch evidence, and updated chain as tracked repository source`)
 
 Still future:
 
-- CloudWatch Service Telemetry Metric Filter Baseline Review v1
+- CloudWatch Service Telemetry Alarm Baseline Review v1
 
 This plan now includes bounded first-job image publication and bounded
 second-job rollout paths plus a real ECS service baseline and a completed
@@ -394,5 +399,14 @@ locks the exact future `app.py` diff. The telemetry patch now completes that
 reviewed `app.py` change, keeps the public contract stable, and proves the
 structured snapshot is present in CloudWatch. The source-publication
 checkpoint now converges the local runtime commit and CloudWatch telemetry
-evidence into tracked repository source. The next bounded stage is CloudWatch
-service telemetry metric-filter baseline review.
+evidence into tracked repository source. The metric-filter baseline review now
+confirms that the structured snapshot is present while the metric and alarm
+layers remain absent. The metric-filter proposal now defines the minimum
+foundation-scoped metric namespace and blocks Atlas or sovereign telemetry name
+reuse. The controlled patch review now locks the exact one-filter CloudWatch
+mutation boundary. The metric-filter patch now creates that one reviewed filter
+and proves the metric is visible in `DeanzElite/Foundation` without widening
+into alarms or Atlas convergence. The source-publication checkpoint now
+converges the local metric-filter doctrine and patch evidence into tracked
+repository source. The next bounded stage is CloudWatch service telemetry
+alarm baseline review.
