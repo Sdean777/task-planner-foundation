@@ -1,0 +1,42 @@
+{
+  "mission": "Dean'z Elite OS \u2014 CloudWatch Service Telemetry Alarm Human Receiver Inbox Domain Operator Ownership Binding Owner-Of-Record Operator Authority Trace Authority Chain Operator-Authority-To-Owner-Of-Record Transition Chain Transition Linkage Record Input Record Source Patch v1",
+  "status": "completed",
+  "patchVerdict": "approved_repo_only_source_record_created",
+  "approvedSourceRecord": {
+    "path": "aws/approved-transition-linkage-record-input-record-source.json",
+    "recordStatus": "approved_repo_only",
+    "recordKind": "approved_exact_foundation_service_transition_linkage_record_input_record_source_record",
+    "serviceBinding": "task-planner-foundation",
+    "notificationPurpose": "service_telemetry_human_notification",
+    "sourcePosture": "foundation_scoped_non_personal_transition_linkage_record_input_record_source_record"
+  },
+  "currentReviewedAwsBaseline": {
+    "topicArn": "arn:aws:sns:us-east-1:329601960228:task-planner-foundation-service-telemetry-human-notification",
+    "subscriptionsListed": 0,
+    "pendingConfirmationExists": false,
+    "confirmedSubscriptionExists": false,
+    "alarmName": "task-planner-foundation-service-telemetry-snapshot-low-activity",
+    "actionsEnabled": false,
+    "alarmActionsCount": 0,
+    "okActionsCount": 0,
+    "insufficientDataActionsCount": 0,
+    "stateValue": "OK"
+  },
+  "patchBoundaryPreserved": {
+    "appPyChanged": false,
+    "publicSmokeWorkflowChanged": false,
+    "deployWorkflowChanged": false,
+    "awsMutationPerformed": false,
+    "subscriberCreated": false,
+    "alarmActionAttached": false,
+    "transitionLinkageRecordInputRecordApproved": false,
+    "transitionLinkageRecordInputPairApproved": false,
+    "transitionLinkageRecordApproved": false,
+    "transitionChainRecordApproved": false,
+    "operatorAuthorityToOwnerOfRecordRecordApproved": false,
+    "authorityChainRecordApproved": false,
+    "operatorAuthorityTraceApproved": false,
+    "ownerOfRecordStatementApproved": false
+  },
+  "nextMission": "CloudWatch Service Telemetry Alarm Human Receiver Inbox Domain Operator Ownership Binding Owner-Of-Record Operator Authority Trace Authority Chain Operator-Authority-To-Owner-Of-Record Transition Chain Transition Linkage Record Input Record Source Publication v1"
+}

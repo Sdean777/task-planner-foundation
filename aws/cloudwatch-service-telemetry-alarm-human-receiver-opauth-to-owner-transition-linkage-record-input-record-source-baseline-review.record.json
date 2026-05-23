@@ -1,0 +1,31 @@
+{
+  "mission": "Dean'z Elite OS \u2014 CloudWatch Service Telemetry Alarm Human Receiver Inbox Domain Operator Ownership Binding Owner-Of-Record Operator Authority Trace Authority Chain Operator-Authority-To-Owner-Of-Record Transition Chain Transition Linkage Record Input Record Source Baseline Review v1",
+  "status": "completed",
+  "reviewVerdict": "domain_operator_ownership_binding_owner_of_record_operator_authority_trace_authority_chain_operator_authority_to_owner_of_record_transition_chain_transition_linkage_record_input_record_source_proposal_ready_no_approved_transition_linkage_record_input_record_source_exists",
+  "repoTransitionLinkageRecordInputRecordSourceBaseline": {
+    "approvedExactSourceRecordExists": false,
+    "approvedExactSourceRecordForExactStringExists": false,
+    "approvedFoundationScopedTransitionLinkageRecordInputRecordSourceDoctrineExists": false,
+    "approvedTransitionLinkageRecordInputRecordSourceBaselineExists": false,
+    "placeholderOnlyTransitionLinkageRecordInputRecordSourceReferencesRemain": true
+  },
+  "currentReviewedAwsBaseline": {
+    "sourceRecord": "aws/cloudwatch-service-telemetry-alarm-human-receiver-opauth-to-owner-transition-linkage-record-input-record-baseline-review.record.json",
+    "topicArn": "arn:aws:sns:us-east-1:329601960228:task-planner-foundation-service-telemetry-human-notification",
+    "subscriptionsListed": 0,
+    "pendingConfirmationExists": false,
+    "confirmedSubscriptionExists": false,
+    "alarmName": "task-planner-foundation-service-telemetry-snapshot-low-activity",
+    "actionsEnabled": false,
+    "alarmActionsCount": 0,
+    "okActionsCount": 0,
+    "insufficientDataActionsCount": 0,
+    "stateValue": "OK"
+  },
+  "antiCollisionBoundary": {
+    "atlasTransitionLinkageRecordInputRecordSourceReuseAllowed": false,
+    "sharedSovereignNotificationTransitionLinkageRecordInputRecordSourceAllowed": false,
+    "foundationScopedTransitionLinkageRecordInputRecordSourceRequired": true
+  },
+  "nextMission": "CloudWatch Service Telemetry Alarm Human Receiver Inbox Domain Operator Ownership Binding Owner-Of-Record Operator Authority Trace Authority Chain Operator-Authority-To-Owner-Of-Record Transition Chain Transition Linkage Record Input Record Source Proposal v1"
+}

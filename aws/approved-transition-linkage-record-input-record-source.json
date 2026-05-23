@@ -1,0 +1,15 @@
+{
+  "recordStatus": "approved_repo_only",
+  "recordKind": "approved_exact_foundation_service_transition_linkage_record_input_record_source_record",
+  "serviceBinding": "task-planner-foundation",
+  "notificationPurpose": "service_telemetry_human_notification",
+  "sourcePosture": "foundation_scoped_non_personal_transition_linkage_record_input_record_source_record",
+  "operatorAuthorityTraceInputRecordRef": "<future-approved-operator-authority-trace-input-record>",
+  "ownerOfRecordInputRecordRef": "<future-approved-owner-of-record-input-record>",
+  "placeholderExactSourceRecordPattern": "<future-approved-operator-authority-trace-input-record> -> <future-approved-owner-of-record-input-record> -> <future-approved-transition-linkage-record-input-record-source-record>",
+  "personalSourceRecordAllowed": false,
+  "sharedAtlasOrBrainSourceRecordAllowed": false,
+  "sharedSovereignOsNotificationSourceRecordAllowed": false,
+  "crossServiceSharedSourceRecordAllowed": false,
+  "approvedByMission": "Dean'z Elite OS \u2014 CloudWatch Service Telemetry Alarm Human Receiver Inbox Domain Operator Ownership Binding Owner-Of-Record Operator Authority Trace Authority Chain Operator-Authority-To-Owner-Of-Record Transition Chain Transition Linkage Record Input Record Source Patch v1"
+}
