@@ -1,0 +1,37 @@
+{
+  "mission": "Dean'z Elite OS — CloudWatch Service Telemetry Alarm Human Receiver Patch v1",
+  "status": "completed",
+  "patchVerdict": "email_subscription_created_pending_confirmation_alarm_unchanged",
+  "receiverShape": {
+    "topicArn": "arn:aws:sns:us-east-1:329601960228:task-planner-foundation-service-telemetry-human-notification",
+    "protocol": "email",
+    "endpoint": "admin@deanzeliteenterprise.com",
+    "subscribeReturnedSubscriptionArn": "arn:aws:sns:us-east-1:329601960228:task-planner-foundation-service-telemetry-human-notification:630de573-199a-4978-8fe3-ac9245a22eaa",
+    "listSubscriptionsByTopicSubscriptionArn": "PendingConfirmation",
+    "pendingConfirmation": true
+  },
+  "alarmPostPatchBaseline": {
+    "alarmName": "task-planner-foundation-service-telemetry-snapshot-low-activity",
+    "actionsEnabled": false,
+    "alarmActionsCount": 0,
+    "okActionsCount": 0,
+    "insufficientDataActionsCount": 0,
+    "stateValue": "OK"
+  },
+  "verification": {
+    "topicPreviouslyUnsubscribed": true,
+    "subscriptionCreated": true,
+    "listSubscriptionsByTopicShowsEndpoint": true,
+    "listSubscriptionsByTopicShowsPendingConfirmation": true,
+    "alarmStillActionsDisabled": true
+  },
+  "preservedBoundaries": {
+    "appPyChanged": false,
+    "publicSmokeWorkflowChanged": false,
+    "deployWorkflowChanged": false,
+    "alarmMutationPerformed": false,
+    "alarmActionWiringPerformed": false,
+    "secondSubscriptionCreated": false
+  },
+  "nextMission": "CloudWatch Service Telemetry Alarm Human Receiver Confirmation Review v1"
+}
