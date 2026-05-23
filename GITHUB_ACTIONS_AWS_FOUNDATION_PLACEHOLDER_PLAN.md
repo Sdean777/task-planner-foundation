@@ -373,10 +373,15 @@ Current completed/active step:
 - CloudWatch service telemetry metric-filter controlled patch review (`exact one-filter CloudWatch mutation locked to the foundation log group, namespace, and metric name with Atlas name reuse blocked`)
 - CloudWatch service telemetry metric-filter patch (`one reviewed metric filter created on /deanz-elite/task-planner-foundation, metric visible in DeanzElite/Foundation, and Atlas name reuse still blocked`)
 - CloudWatch service telemetry metric-filter source publication (`publishes the local metric-filter review, proposal, controlled review, patch doctrine, patch evidence, and updated chain as tracked repository source`)
+- CloudWatch service telemetry alarm baseline review (`foundation metric present, no alarms attached, one recent datapoint visible, and proposal stage now justified with explicit missing-data caution`)
+- CloudWatch service telemetry alarm proposal (`first alarm shape stays foundation-scoped, actions-disabled, and missing-data aware while Atlas and sovereign OS naming stay blocked`)
+- CloudWatch service telemetry alarm controlled patch review (`exact one-alarm CloudWatch mutation locked to the foundation metric, actions-disabled posture, and sparse-signal safety boundary`)
+- CloudWatch service telemetry alarm patch (`one reviewed alarm created on the foundation metric, actions remain disabled, and the initial state is bounded to INSUFFICIENT_DATA rather than paging posture`)
+- CloudWatch service telemetry alarm source publication (`publishes the local alarm review, proposal, controlled review, patch doctrine, patch evidence, and updated chain as tracked repository source`)
 
 Still future:
 
-- CloudWatch Service Telemetry Alarm Baseline Review v1
+- CloudWatch Service Telemetry Alarm State Review v1
 
 This plan now includes bounded first-job image publication and bounded
 second-job rollout paths plus a real ECS service baseline and a completed
@@ -408,5 +413,18 @@ mutation boundary. The metric-filter patch now creates that one reviewed filter
 and proves the metric is visible in `DeanzElite/Foundation` without widening
 into alarms or Atlas convergence. The source-publication checkpoint now
 converges the local metric-filter doctrine and patch evidence into tracked
-repository source. The next bounded stage is CloudWatch service telemetry
-alarm baseline review.
+repository source. The alarm baseline review now confirms that the foundation
+metric exists, no alarm layer is attached yet, and the datapoint history is
+sparse enough that the next bounded stage must remain proposal-only with
+explicit missing-data posture. The alarm proposal now defines the minimum first
+alarm shape as foundation-scoped, actions-disabled, and missing-data aware,
+while keeping the next bounded stage at controlled patch review rather than
+live mutation. The controlled patch review now locks the exact one-alarm
+CloudWatch mutation boundary and keeps the next bounded stage at a single
+foundation-scoped alarm patch rather than a wider observability rollout. The
+alarm patch now creates that one reviewed alarm, keeps actions disabled, and
+accepts the initial `INSUFFICIENT_DATA` state as the correct sparse-signal
+posture immediately after creation. The source-publication checkpoint now
+converges the local alarm doctrine and patch evidence into tracked repository
+source. The next bounded stage is alarm-state review, not a larger alarm or
+paging rollout.
