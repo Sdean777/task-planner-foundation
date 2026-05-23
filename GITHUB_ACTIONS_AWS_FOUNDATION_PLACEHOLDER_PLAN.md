@@ -452,9 +452,13 @@ Current completed/active step:
 - CloudWatch service telemetry alarm human receiver inbox domain operator ownership binding owner-of-record operator-authority-trace authority-chain operator-authority-to-owner-of-record transition-chain transition-linkage record input record post-source review (`confirms the published approved source closes the source-truth gap, but exact input-side references remain placeholders, so the next stage remains proposal-only rather than repo-only input-record approval`)
 - CloudWatch service telemetry alarm human receiver inbox domain operator ownership binding owner-of-record operator-authority-trace authority-chain operator-authority-to-owner-of-record transition-chain transition-linkage record input record post-source proposal (`defines the minimum future decision boundary after source publication, requires published source truth to stay in place, forbids placeholder input references in any future final approval, and keeps repo-only input-record approval out of scope while the exact input side remains unapproved`)
 
+- CloudWatch service telemetry alarm human receiver confirmation state review (`re-checks the published live receiver state, confirms whether the SNS endpoint has moved beyond PendingConfirmation, and keeps alarm wiring blocked while the alarm remains unwired and the subscription remains unconfirmed`)
+- CloudWatch service telemetry alarm human receiver confirmation state proposal (`defines the minimum hold-shape decision after the published receiver is re-checked, keeps the pending-confirmation and actions-disabled posture explicit, and blocks alarm wiring, receiver swaps, or new SNS mutation`)
+- CloudWatch service telemetry alarm human receiver confirmation state source publication (`publishes the confirmation-state review and proposal checkpoint as tracked repository source while the receiver still remains pending confirmation and the alarm still remains unwired`)
+
 Still future:
 
-- CloudWatch Service Telemetry Alarm Human Receiver Confirmation State Review v1
+- CloudWatch Service Telemetry Alarm Human Receiver Confirmation State Post-Source Review v1
 
 This plan now includes bounded first-job image publication and bounded
 second-job rollout paths plus a real ECS service baseline and a completed
